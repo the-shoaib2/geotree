@@ -19,6 +19,7 @@ class DatabaseManager:
 
     def _init_db(self) -> None:
         with self._get_connection() as conn:
+            # Re-create/upgrade schema to match all DevOps verification fields
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS downloads (
                     product_id TEXT PRIMARY KEY,
@@ -31,14 +32,22 @@ class DatabaseManager:
                     sha256_hash TEXT,
                     local_path TEXT,
                     district TEXT,
-                    dataset_type TEXT DEFAULT 'sentinel2'
+                    dataset_type TEXT DEFAULT 'sentinel2',
+                    verification_date TEXT,
+                    source TEXT
                 )
             """)
+            # Check for verification_date and source in case table was created with old schema
+            cursor = conn.execute("PRAGMA table_info(downloads)")
+            columns = [col[1] for col in cursor.fetchall()]
+            if "verification_date" not in columns:
+                conn.execute("ALTER TABLE downloads ADD COLUMN verification_date TEXT")
+            if "source" not in columns:
+                conn.execute("ALTER TABLE downloads ADD COLUMN source TEXT")
             conn.commit()
 
     def add_or_update_product(self, product: Dict[str, Any]) -> None:
         """Inserts a new product or updates an existing product record."""
-        # Ensure default keys
         prod = {
             "product_id": product["product_id"],
             "tile_name": product.get("tile_name", "UNKNOWN"),
@@ -50,18 +59,20 @@ class DatabaseManager:
             "sha256_hash": product.get("sha256_hash"),
             "local_path": product.get("local_path"),
             "district": product.get("district"),
-            "dataset_type": product.get("dataset_type", "sentinel2")
+            "dataset_type": product.get("dataset_type", "sentinel2"),
+            "verification_date": product.get("verification_date"),
+            "source": product.get("source")
         }
         
         query = """
             INSERT INTO downloads (
                 product_id, tile_name, date, cloud_cover, size, 
                 download_status, download_time, sha256_hash, local_path,
-                district, dataset_type
+                district, dataset_type, verification_date, source
             ) VALUES (
                 :product_id, :tile_name, :date, :cloud_cover, :size, 
                 :download_status, :download_time, :sha256_hash, :local_path,
-                :district, :dataset_type
+                :district, :dataset_type, :verification_date, :source
             )
             ON CONFLICT(product_id) DO UPDATE SET
                 tile_name = excluded.tile_name,
@@ -73,7 +84,9 @@ class DatabaseManager:
                 sha256_hash = excluded.sha256_hash,
                 local_path = excluded.local_path,
                 district = excluded.district,
-                dataset_type = excluded.dataset_type
+                dataset_type = excluded.dataset_type,
+                verification_date = excluded.verification_date,
+                source = excluded.source
         """
         with self._get_connection() as conn:
             conn.execute(query, prod)
