@@ -1,0 +1,1664 @@
+{
+  "pipeline": "GeoTree Full Analysis",
+  "tiles_dir": "dataset/yolo/images/val",
+  "output_dir": "reports",
+  "detection": {
+    "total_images": 10,
+    "total_detections": 10,
+    "per_image": [
+      {
+        "image_path": "dataset/yolo/images/val/bandarban_2026-01-15.png",
+        "image_size": 640,
+        "detections": [
+          {
+            "class_id": 0,
+            "class_name": "tree",
+            "confidence": 0.7169,
+            "bbox_xywh": [
+              0.5025,
+              0.4982,
+              0.1146,
+              0.1079
+            ],
+            "bbox_xyxy_pixels": [
+              284.9,
+              284.3,
+              358.3,
+              353.4
+            ],
+            "crown_area_px": 5067.7,
+            "color": "#2ea44f"
+          }
+        ],
+        "num_detections": 1,
+        "latency_ms": 65.14
+      },
+      {
+        "image_path": "dataset/yolo/images/val/coxs_bazar_2026-04-15.png",
+        "image_size": 640,
+        "detections": [
+          {
+            "class_id": 0,
+            "class_name": "tree",
+            "confidence": 0.7169,
+            "bbox_xywh": [
+              0.5025,
+              0.4982,
+              0.1146,
+              0.1079
+            ],
+            "bbox_xyxy_pixels": [
+              284.9,
+              284.3,
+              358.3,
+              353.4
+            ],
+            "crown_area_px": 5067.7,
+            "color": "#2ea44f"
+          }
+        ],
+        "num_detections": 1,
+        "latency_ms": 21.24
+      },
+      {
+        "image_path": "dataset/yolo/images/val/coxs_bazar_2026-07-15.png",
+        "image_size": 640,
+        "detections": [
+          {
+            "class_id": 0,
+            "class_name": "tree",
+            "confidence": 0.7169,
+            "bbox_xywh": [
+              0.5025,
+              0.4982,
+              0.1146,
+              0.1079
+            ],
+            "bbox_xyxy_pixels": [
+              284.9,
+              284.3,
+              358.3,
+              353.4
+            ],
+            "crown_area_px": 5067.7,
+            "color": "#2ea44f"
+          }
+        ],
+        "num_detections": 1,
+        "latency_ms": 15.5
+      },
+      {
+        "image_path": "dataset/yolo/images/val/gazipur_2026-07-15.png",
+        "image_size": 640,
+        "detections": [
+          {
+            "class_id": 0,
+            "class_name": "tree",
+            "confidence": 0.7169,
+            "bbox_xywh": [
+              0.5025,
+              0.4982,
+              0.1146,
+              0.1079
+            ],
+            "bbox_xyxy_pixels": [
+              284.9,
+              284.3,
+              358.3,
+              353.4
+            ],
+            "crown_area_px": 5067.7,
+            "color": "#2ea44f"
+          }
+        ],
+        "num_detections": 1,
+        "latency_ms": 15.42
+      },
+      {
+        "image_path": "dataset/yolo/images/val/gazipur_2026-10-15.png",
+        "image_size": 640,
+        "detections": [
+          {
+            "class_id": 0,
+            "class_name": "tree",
+            "confidence": 0.7169,
+            "bbox_xywh": [
+              0.5025,
+              0.4982,
+              0.1146,
+              0.1079
+            ],
+            "bbox_xyxy_pixels": [
+              284.9,
+              284.3,
+              358.3,
+              353.4
+            ],
+            "crown_area_px": 5067.7,
+            "color": "#2ea44f"
+          }
+        ],
+        "num_detections": 1,
+        "latency_ms": 14.79
+      },
+      {
+        "image_path": "dataset/yolo/images/val/rangamati_2026-01-15.png",
+        "image_size": 640,
+        "detections": [
+          {
+            "class_id": 0,
+            "class_name": "tree",
+            "confidence": 0.7171,
+            "bbox_xywh": [
+              0.5023,
+              0.4982,
+              0.1144,
+              0.1076
+            ],
+            "bbox_xyxy_pixels": [
+              284.9,
+              284.4,
+              358.1,
+              353.3
+            ],
+            "crown_area_px": 5042.5,
+            "color": "#2ea44f"
+          }
+        ],
+        "num_detections": 1,
+        "latency_ms": 14.16
+      },
+      {
+        "image_path": "dataset/yolo/images/val/rangamati_2026-10-15.png",
+        "image_size": 640,
+        "detections": [
+          {
+            "class_id": 0,
+            "class_name": "tree",
+            "confidence": 0.7169,
+            "bbox_xywh": [
+              0.5025,
+              0.4982,
+              0.1146,
+              0.1079
+            ],
+            "bbox_xyxy_pixels": [
+              284.9,
+              284.3,
+              358.3,
+              353.4
+            ],
+            "crown_area_px": 5067.7,
+            "color": "#2ea44f"
+          }
+        ],
+        "num_detections": 1,
+        "latency_ms": 13.75
+      },
+      {
+        "image_path": "dataset/yolo/images/val/sundarbans_2026-07-15.png",
+        "image_size": 640,
+        "detections": [
+          {
+            "class_id": 0,
+            "class_name": "tree",
+            "confidence": 0.7169,
+            "bbox_xywh": [
+              0.5025,
+              0.4982,
+              0.1146,
+              0.1079
+            ],
+            "bbox_xyxy_pixels": [
+              284.9,
+              284.3,
+              358.3,
+              353.4
+            ],
+            "crown_area_px": 5067.7,
+            "color": "#2ea44f"
+          }
+        ],
+        "num_detections": 1,
+        "latency_ms": 13.81
+      },
+      {
+        "image_path": "dataset/yolo/images/val/sylhet_2026-07-15.png",
+        "image_size": 640,
+        "detections": [
+          {
+            "class_id": 0,
+            "class_name": "tree",
+            "confidence": 0.7169,
+            "bbox_xywh": [
+              0.5025,
+              0.4982,
+              0.1146,
+              0.1079
+            ],
+            "bbox_xyxy_pixels": [
+              284.9,
+              284.3,
+              358.3,
+              353.4
+            ],
+            "crown_area_px": 5067.7,
+            "color": "#2ea44f"
+          }
+        ],
+        "num_detections": 1,
+        "latency_ms": 13.8
+      },
+      {
+        "image_path": "dataset/yolo/images/val/sylhet_2026-10-15.png",
+        "image_size": 640,
+        "detections": [
+          {
+            "class_id": 0,
+            "class_name": "tree",
+            "confidence": 0.7169,
+            "bbox_xywh": [
+              0.5025,
+              0.4982,
+              0.1146,
+              0.1079
+            ],
+            "bbox_xyxy_pixels": [
+              284.9,
+              284.3,
+              358.3,
+              353.4
+            ],
+            "crown_area_px": 5067.7,
+            "color": "#2ea44f"
+          }
+        ],
+        "num_detections": 1,
+        "latency_ms": 13.74
+      }
+    ],
+    "elapsed_sec": 0.82
+  },
+  "segmentation": {
+    "tiles_segmented": 10,
+    "per_tile": [
+      {
+        "source": "dataset/yolo/images/val/bandarban_2026-01-15.png",
+        "image_shape": [
+          512,
+          512
+        ],
+        "total_pixels": 262144,
+        "pixel_counts": {
+          "background": 0,
+          "tree_crown": 0,
+          "forest": 0,
+          "grass": 0,
+          "crop": 0,
+          "water": 0,
+          "bare_soil": 0,
+          "built_up": 0,
+          "road": 0,
+          "cloud": 0,
+          "shadow": 262144
+        },
+        "percentages": {
+          "background": 0.0,
+          "tree_crown": 0.0,
+          "forest": 0.0,
+          "grass": 0.0,
+          "crop": 0.0,
+          "water": 0.0,
+          "bare_soil": 0.0,
+          "built_up": 0.0,
+          "road": 0.0,
+          "cloud": 0.0,
+          "shadow": 100.0
+        },
+        "class_details": [
+          {
+            "class_id": 10,
+            "class_name": "shadow",
+            "label": "\ud83c\udf11 Shadow",
+            "color": "#484f58",
+            "pixel_count": 262144,
+            "percentage": 100.0
+          }
+        ],
+        "num_classes_present": 1
+      },
+      {
+        "source": "dataset/yolo/images/val/coxs_bazar_2026-04-15.png",
+        "image_shape": [
+          512,
+          512
+        ],
+        "total_pixels": 262144,
+        "pixel_counts": {
+          "background": 0,
+          "tree_crown": 0,
+          "forest": 0,
+          "grass": 0,
+          "crop": 0,
+          "water": 0,
+          "bare_soil": 0,
+          "built_up": 0,
+          "road": 0,
+          "cloud": 0,
+          "shadow": 262144
+        },
+        "percentages": {
+          "background": 0.0,
+          "tree_crown": 0.0,
+          "forest": 0.0,
+          "grass": 0.0,
+          "crop": 0.0,
+          "water": 0.0,
+          "bare_soil": 0.0,
+          "built_up": 0.0,
+          "road": 0.0,
+          "cloud": 0.0,
+          "shadow": 100.0
+        },
+        "class_details": [
+          {
+            "class_id": 10,
+            "class_name": "shadow",
+            "label": "\ud83c\udf11 Shadow",
+            "color": "#484f58",
+            "pixel_count": 262144,
+            "percentage": 100.0
+          }
+        ],
+        "num_classes_present": 1
+      },
+      {
+        "source": "dataset/yolo/images/val/coxs_bazar_2026-07-15.png",
+        "image_shape": [
+          512,
+          512
+        ],
+        "total_pixels": 262144,
+        "pixel_counts": {
+          "background": 0,
+          "tree_crown": 0,
+          "forest": 0,
+          "grass": 0,
+          "crop": 0,
+          "water": 0,
+          "bare_soil": 0,
+          "built_up": 0,
+          "road": 0,
+          "cloud": 0,
+          "shadow": 262144
+        },
+        "percentages": {
+          "background": 0.0,
+          "tree_crown": 0.0,
+          "forest": 0.0,
+          "grass": 0.0,
+          "crop": 0.0,
+          "water": 0.0,
+          "bare_soil": 0.0,
+          "built_up": 0.0,
+          "road": 0.0,
+          "cloud": 0.0,
+          "shadow": 100.0
+        },
+        "class_details": [
+          {
+            "class_id": 10,
+            "class_name": "shadow",
+            "label": "\ud83c\udf11 Shadow",
+            "color": "#484f58",
+            "pixel_count": 262144,
+            "percentage": 100.0
+          }
+        ],
+        "num_classes_present": 1
+      },
+      {
+        "source": "dataset/yolo/images/val/gazipur_2026-07-15.png",
+        "image_shape": [
+          512,
+          512
+        ],
+        "total_pixels": 262144,
+        "pixel_counts": {
+          "background": 0,
+          "tree_crown": 0,
+          "forest": 0,
+          "grass": 0,
+          "crop": 0,
+          "water": 0,
+          "bare_soil": 0,
+          "built_up": 0,
+          "road": 0,
+          "cloud": 0,
+          "shadow": 262144
+        },
+        "percentages": {
+          "background": 0.0,
+          "tree_crown": 0.0,
+          "forest": 0.0,
+          "grass": 0.0,
+          "crop": 0.0,
+          "water": 0.0,
+          "bare_soil": 0.0,
+          "built_up": 0.0,
+          "road": 0.0,
+          "cloud": 0.0,
+          "shadow": 100.0
+        },
+        "class_details": [
+          {
+            "class_id": 10,
+            "class_name": "shadow",
+            "label": "\ud83c\udf11 Shadow",
+            "color": "#484f58",
+            "pixel_count": 262144,
+            "percentage": 100.0
+          }
+        ],
+        "num_classes_present": 1
+      },
+      {
+        "source": "dataset/yolo/images/val/gazipur_2026-10-15.png",
+        "image_shape": [
+          512,
+          512
+        ],
+        "total_pixels": 262144,
+        "pixel_counts": {
+          "background": 0,
+          "tree_crown": 0,
+          "forest": 0,
+          "grass": 0,
+          "crop": 0,
+          "water": 0,
+          "bare_soil": 0,
+          "built_up": 0,
+          "road": 0,
+          "cloud": 0,
+          "shadow": 262144
+        },
+        "percentages": {
+          "background": 0.0,
+          "tree_crown": 0.0,
+          "forest": 0.0,
+          "grass": 0.0,
+          "crop": 0.0,
+          "water": 0.0,
+          "bare_soil": 0.0,
+          "built_up": 0.0,
+          "road": 0.0,
+          "cloud": 0.0,
+          "shadow": 100.0
+        },
+        "class_details": [
+          {
+            "class_id": 10,
+            "class_name": "shadow",
+            "label": "\ud83c\udf11 Shadow",
+            "color": "#484f58",
+            "pixel_count": 262144,
+            "percentage": 100.0
+          }
+        ],
+        "num_classes_present": 1
+      },
+      {
+        "source": "dataset/yolo/images/val/rangamati_2026-01-15.png",
+        "image_shape": [
+          512,
+          512
+        ],
+        "total_pixels": 262144,
+        "pixel_counts": {
+          "background": 0,
+          "tree_crown": 0,
+          "forest": 0,
+          "grass": 0,
+          "crop": 0,
+          "water": 0,
+          "bare_soil": 0,
+          "built_up": 0,
+          "road": 0,
+          "cloud": 0,
+          "shadow": 262144
+        },
+        "percentages": {
+          "background": 0.0,
+          "tree_crown": 0.0,
+          "forest": 0.0,
+          "grass": 0.0,
+          "crop": 0.0,
+          "water": 0.0,
+          "bare_soil": 0.0,
+          "built_up": 0.0,
+          "road": 0.0,
+          "cloud": 0.0,
+          "shadow": 100.0
+        },
+        "class_details": [
+          {
+            "class_id": 10,
+            "class_name": "shadow",
+            "label": "\ud83c\udf11 Shadow",
+            "color": "#484f58",
+            "pixel_count": 262144,
+            "percentage": 100.0
+          }
+        ],
+        "num_classes_present": 1
+      },
+      {
+        "source": "dataset/yolo/images/val/rangamati_2026-10-15.png",
+        "image_shape": [
+          512,
+          512
+        ],
+        "total_pixels": 262144,
+        "pixel_counts": {
+          "background": 0,
+          "tree_crown": 0,
+          "forest": 0,
+          "grass": 0,
+          "crop": 0,
+          "water": 0,
+          "bare_soil": 0,
+          "built_up": 0,
+          "road": 0,
+          "cloud": 0,
+          "shadow": 262144
+        },
+        "percentages": {
+          "background": 0.0,
+          "tree_crown": 0.0,
+          "forest": 0.0,
+          "grass": 0.0,
+          "crop": 0.0,
+          "water": 0.0,
+          "bare_soil": 0.0,
+          "built_up": 0.0,
+          "road": 0.0,
+          "cloud": 0.0,
+          "shadow": 100.0
+        },
+        "class_details": [
+          {
+            "class_id": 10,
+            "class_name": "shadow",
+            "label": "\ud83c\udf11 Shadow",
+            "color": "#484f58",
+            "pixel_count": 262144,
+            "percentage": 100.0
+          }
+        ],
+        "num_classes_present": 1
+      },
+      {
+        "source": "dataset/yolo/images/val/sundarbans_2026-07-15.png",
+        "image_shape": [
+          512,
+          512
+        ],
+        "total_pixels": 262144,
+        "pixel_counts": {
+          "background": 0,
+          "tree_crown": 0,
+          "forest": 0,
+          "grass": 0,
+          "crop": 0,
+          "water": 0,
+          "bare_soil": 0,
+          "built_up": 0,
+          "road": 0,
+          "cloud": 0,
+          "shadow": 262144
+        },
+        "percentages": {
+          "background": 0.0,
+          "tree_crown": 0.0,
+          "forest": 0.0,
+          "grass": 0.0,
+          "crop": 0.0,
+          "water": 0.0,
+          "bare_soil": 0.0,
+          "built_up": 0.0,
+          "road": 0.0,
+          "cloud": 0.0,
+          "shadow": 100.0
+        },
+        "class_details": [
+          {
+            "class_id": 10,
+            "class_name": "shadow",
+            "label": "\ud83c\udf11 Shadow",
+            "color": "#484f58",
+            "pixel_count": 262144,
+            "percentage": 100.0
+          }
+        ],
+        "num_classes_present": 1
+      },
+      {
+        "source": "dataset/yolo/images/val/sylhet_2026-07-15.png",
+        "image_shape": [
+          512,
+          512
+        ],
+        "total_pixels": 262144,
+        "pixel_counts": {
+          "background": 0,
+          "tree_crown": 0,
+          "forest": 0,
+          "grass": 0,
+          "crop": 0,
+          "water": 0,
+          "bare_soil": 0,
+          "built_up": 0,
+          "road": 0,
+          "cloud": 0,
+          "shadow": 262144
+        },
+        "percentages": {
+          "background": 0.0,
+          "tree_crown": 0.0,
+          "forest": 0.0,
+          "grass": 0.0,
+          "crop": 0.0,
+          "water": 0.0,
+          "bare_soil": 0.0,
+          "built_up": 0.0,
+          "road": 0.0,
+          "cloud": 0.0,
+          "shadow": 100.0
+        },
+        "class_details": [
+          {
+            "class_id": 10,
+            "class_name": "shadow",
+            "label": "\ud83c\udf11 Shadow",
+            "color": "#484f58",
+            "pixel_count": 262144,
+            "percentage": 100.0
+          }
+        ],
+        "num_classes_present": 1
+      },
+      {
+        "source": "dataset/yolo/images/val/sylhet_2026-10-15.png",
+        "image_shape": [
+          512,
+          512
+        ],
+        "total_pixels": 262144,
+        "pixel_counts": {
+          "background": 0,
+          "tree_crown": 0,
+          "forest": 0,
+          "grass": 0,
+          "crop": 0,
+          "water": 0,
+          "bare_soil": 0,
+          "built_up": 0,
+          "road": 0,
+          "cloud": 0,
+          "shadow": 262144
+        },
+        "percentages": {
+          "background": 0.0,
+          "tree_crown": 0.0,
+          "forest": 0.0,
+          "grass": 0.0,
+          "crop": 0.0,
+          "water": 0.0,
+          "bare_soil": 0.0,
+          "built_up": 0.0,
+          "road": 0.0,
+          "cloud": 0.0,
+          "shadow": 100.0
+        },
+        "class_details": [
+          {
+            "class_id": 10,
+            "class_name": "shadow",
+            "label": "\ud83c\udf11 Shadow",
+            "color": "#484f58",
+            "pixel_count": 262144,
+            "percentage": 100.0
+          }
+        ],
+        "num_classes_present": 1
+      }
+    ],
+    "elapsed_sec": 0.04
+  },
+  "vegetation_health": {
+    "tiles_analyzed": 10,
+    "avg_health_score": 10.0,
+    "avg_ndvi": 0.0023,
+    "per_tile": [
+      {
+        "source": "dataset/yolo/images/val/bandarban_2026-01-15.png",
+        "total_pixels": 262144,
+        "vegetation_pixels": 0,
+        "vegetation_coverage_pct": 0.0,
+        "health_score": 0.0,
+        "health_grade": "F \u2014 Critical",
+        "ndvi_statistics": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "median": 0.0
+        },
+        "zone_breakdown": [
+          {
+            "zone": "dead",
+            "emoji": "\u2620\ufe0f",
+            "color": "#6e1423",
+            "ndvi_range": [
+              -1.0,
+              0.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "stressed",
+            "emoji": "\ud83d\udfe5",
+            "color": "#f85149",
+            "ndvi_range": [
+              0.0,
+              0.2
+            ],
+            "pixel_count": 262144,
+            "total_pct": 100.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "moderate",
+            "emoji": "\ud83d\udfe8",
+            "color": "#e3b341",
+            "ndvi_range": [
+              0.2,
+              0.4
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "healthy",
+            "emoji": "\ud83d\udfe9",
+            "color": "#7ee787",
+            "ndvi_range": [
+              0.4,
+              0.6
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "vigorous",
+            "emoji": "\ud83d\udc9a",
+            "color": "#2ea44f",
+            "ndvi_range": [
+              0.6,
+              1.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          }
+        ]
+      },
+      {
+        "source": "dataset/yolo/images/val/coxs_bazar_2026-04-15.png",
+        "total_pixels": 262144,
+        "vegetation_pixels": 0,
+        "vegetation_coverage_pct": 0.0,
+        "health_score": 0.0,
+        "health_grade": "F \u2014 Critical",
+        "ndvi_statistics": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "median": 0.0
+        },
+        "zone_breakdown": [
+          {
+            "zone": "dead",
+            "emoji": "\u2620\ufe0f",
+            "color": "#6e1423",
+            "ndvi_range": [
+              -1.0,
+              0.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "stressed",
+            "emoji": "\ud83d\udfe5",
+            "color": "#f85149",
+            "ndvi_range": [
+              0.0,
+              0.2
+            ],
+            "pixel_count": 262144,
+            "total_pct": 100.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "moderate",
+            "emoji": "\ud83d\udfe8",
+            "color": "#e3b341",
+            "ndvi_range": [
+              0.2,
+              0.4
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "healthy",
+            "emoji": "\ud83d\udfe9",
+            "color": "#7ee787",
+            "ndvi_range": [
+              0.4,
+              0.6
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "vigorous",
+            "emoji": "\ud83d\udc9a",
+            "color": "#2ea44f",
+            "ndvi_range": [
+              0.6,
+              1.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          }
+        ]
+      },
+      {
+        "source": "dataset/yolo/images/val/coxs_bazar_2026-07-15.png",
+        "total_pixels": 262144,
+        "vegetation_pixels": 0,
+        "vegetation_coverage_pct": 0.0,
+        "health_score": 0.0,
+        "health_grade": "F \u2014 Critical",
+        "ndvi_statistics": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "median": 0.0
+        },
+        "zone_breakdown": [
+          {
+            "zone": "dead",
+            "emoji": "\u2620\ufe0f",
+            "color": "#6e1423",
+            "ndvi_range": [
+              -1.0,
+              0.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "stressed",
+            "emoji": "\ud83d\udfe5",
+            "color": "#f85149",
+            "ndvi_range": [
+              0.0,
+              0.2
+            ],
+            "pixel_count": 262144,
+            "total_pct": 100.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "moderate",
+            "emoji": "\ud83d\udfe8",
+            "color": "#e3b341",
+            "ndvi_range": [
+              0.2,
+              0.4
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "healthy",
+            "emoji": "\ud83d\udfe9",
+            "color": "#7ee787",
+            "ndvi_range": [
+              0.4,
+              0.6
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "vigorous",
+            "emoji": "\ud83d\udc9a",
+            "color": "#2ea44f",
+            "ndvi_range": [
+              0.6,
+              1.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          }
+        ]
+      },
+      {
+        "source": "dataset/yolo/images/val/gazipur_2026-07-15.png",
+        "total_pixels": 262144,
+        "vegetation_pixels": 0,
+        "vegetation_coverage_pct": 0.0,
+        "health_score": 0.0,
+        "health_grade": "F \u2014 Critical",
+        "ndvi_statistics": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "median": 0.0
+        },
+        "zone_breakdown": [
+          {
+            "zone": "dead",
+            "emoji": "\u2620\ufe0f",
+            "color": "#6e1423",
+            "ndvi_range": [
+              -1.0,
+              0.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "stressed",
+            "emoji": "\ud83d\udfe5",
+            "color": "#f85149",
+            "ndvi_range": [
+              0.0,
+              0.2
+            ],
+            "pixel_count": 262144,
+            "total_pct": 100.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "moderate",
+            "emoji": "\ud83d\udfe8",
+            "color": "#e3b341",
+            "ndvi_range": [
+              0.2,
+              0.4
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "healthy",
+            "emoji": "\ud83d\udfe9",
+            "color": "#7ee787",
+            "ndvi_range": [
+              0.4,
+              0.6
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "vigorous",
+            "emoji": "\ud83d\udc9a",
+            "color": "#2ea44f",
+            "ndvi_range": [
+              0.6,
+              1.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          }
+        ]
+      },
+      {
+        "source": "dataset/yolo/images/val/gazipur_2026-10-15.png",
+        "total_pixels": 262144,
+        "vegetation_pixels": 0,
+        "vegetation_coverage_pct": 0.0,
+        "health_score": 0.0,
+        "health_grade": "F \u2014 Critical",
+        "ndvi_statistics": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "median": 0.0
+        },
+        "zone_breakdown": [
+          {
+            "zone": "dead",
+            "emoji": "\u2620\ufe0f",
+            "color": "#6e1423",
+            "ndvi_range": [
+              -1.0,
+              0.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "stressed",
+            "emoji": "\ud83d\udfe5",
+            "color": "#f85149",
+            "ndvi_range": [
+              0.0,
+              0.2
+            ],
+            "pixel_count": 262144,
+            "total_pct": 100.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "moderate",
+            "emoji": "\ud83d\udfe8",
+            "color": "#e3b341",
+            "ndvi_range": [
+              0.2,
+              0.4
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "healthy",
+            "emoji": "\ud83d\udfe9",
+            "color": "#7ee787",
+            "ndvi_range": [
+              0.4,
+              0.6
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "vigorous",
+            "emoji": "\ud83d\udc9a",
+            "color": "#2ea44f",
+            "ndvi_range": [
+              0.6,
+              1.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          }
+        ]
+      },
+      {
+        "source": "dataset/yolo/images/val/rangamati_2026-01-15.png",
+        "total_pixels": 262144,
+        "vegetation_pixels": 10309,
+        "vegetation_coverage_pct": 3.93,
+        "health_score": 100.0,
+        "health_grade": "A \u2014 Excellent",
+        "ndvi_statistics": {
+          "mean": 0.0233,
+          "std": 0.1217,
+          "min": -1.0,
+          "max": 1.0,
+          "median": 0.0
+        },
+        "zone_breakdown": [
+          {
+            "zone": "dead",
+            "emoji": "\u2620\ufe0f",
+            "color": "#6e1423",
+            "ndvi_range": [
+              -1.0,
+              0.0
+            ],
+            "pixel_count": 251,
+            "total_pct": 0.1,
+            "vegetation_pct": 2.43
+          },
+          {
+            "zone": "stressed",
+            "emoji": "\ud83d\udfe5",
+            "color": "#f85149",
+            "ndvi_range": [
+              0.0,
+              0.2
+            ],
+            "pixel_count": 251963,
+            "total_pct": 96.12,
+            "vegetation_pct": 2444.11
+          },
+          {
+            "zone": "moderate",
+            "emoji": "\ud83d\udfe8",
+            "color": "#e3b341",
+            "ndvi_range": [
+              0.2,
+              0.4
+            ],
+            "pixel_count": 1392,
+            "total_pct": 0.53,
+            "vegetation_pct": 13.5
+          },
+          {
+            "zone": "healthy",
+            "emoji": "\ud83d\udfe9",
+            "color": "#7ee787",
+            "ndvi_range": [
+              0.4,
+              0.6
+            ],
+            "pixel_count": 2786,
+            "total_pct": 1.06,
+            "vegetation_pct": 27.02
+          },
+          {
+            "zone": "vigorous",
+            "emoji": "\ud83d\udc9a",
+            "color": "#2ea44f",
+            "ndvi_range": [
+              0.6,
+              1.0
+            ],
+            "pixel_count": 5752,
+            "total_pct": 2.19,
+            "vegetation_pct": 55.8
+          }
+        ]
+      },
+      {
+        "source": "dataset/yolo/images/val/rangamati_2026-10-15.png",
+        "total_pixels": 262144,
+        "vegetation_pixels": 0,
+        "vegetation_coverage_pct": 0.0,
+        "health_score": 0.0,
+        "health_grade": "F \u2014 Critical",
+        "ndvi_statistics": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "median": 0.0
+        },
+        "zone_breakdown": [
+          {
+            "zone": "dead",
+            "emoji": "\u2620\ufe0f",
+            "color": "#6e1423",
+            "ndvi_range": [
+              -1.0,
+              0.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "stressed",
+            "emoji": "\ud83d\udfe5",
+            "color": "#f85149",
+            "ndvi_range": [
+              0.0,
+              0.2
+            ],
+            "pixel_count": 262144,
+            "total_pct": 100.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "moderate",
+            "emoji": "\ud83d\udfe8",
+            "color": "#e3b341",
+            "ndvi_range": [
+              0.2,
+              0.4
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "healthy",
+            "emoji": "\ud83d\udfe9",
+            "color": "#7ee787",
+            "ndvi_range": [
+              0.4,
+              0.6
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "vigorous",
+            "emoji": "\ud83d\udc9a",
+            "color": "#2ea44f",
+            "ndvi_range": [
+              0.6,
+              1.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          }
+        ]
+      },
+      {
+        "source": "dataset/yolo/images/val/sundarbans_2026-07-15.png",
+        "total_pixels": 262144,
+        "vegetation_pixels": 0,
+        "vegetation_coverage_pct": 0.0,
+        "health_score": 0.0,
+        "health_grade": "F \u2014 Critical",
+        "ndvi_statistics": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "median": 0.0
+        },
+        "zone_breakdown": [
+          {
+            "zone": "dead",
+            "emoji": "\u2620\ufe0f",
+            "color": "#6e1423",
+            "ndvi_range": [
+              -1.0,
+              0.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "stressed",
+            "emoji": "\ud83d\udfe5",
+            "color": "#f85149",
+            "ndvi_range": [
+              0.0,
+              0.2
+            ],
+            "pixel_count": 262144,
+            "total_pct": 100.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "moderate",
+            "emoji": "\ud83d\udfe8",
+            "color": "#e3b341",
+            "ndvi_range": [
+              0.2,
+              0.4
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "healthy",
+            "emoji": "\ud83d\udfe9",
+            "color": "#7ee787",
+            "ndvi_range": [
+              0.4,
+              0.6
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "vigorous",
+            "emoji": "\ud83d\udc9a",
+            "color": "#2ea44f",
+            "ndvi_range": [
+              0.6,
+              1.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          }
+        ]
+      },
+      {
+        "source": "dataset/yolo/images/val/sylhet_2026-07-15.png",
+        "total_pixels": 262144,
+        "vegetation_pixels": 0,
+        "vegetation_coverage_pct": 0.0,
+        "health_score": 0.0,
+        "health_grade": "F \u2014 Critical",
+        "ndvi_statistics": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "median": 0.0
+        },
+        "zone_breakdown": [
+          {
+            "zone": "dead",
+            "emoji": "\u2620\ufe0f",
+            "color": "#6e1423",
+            "ndvi_range": [
+              -1.0,
+              0.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "stressed",
+            "emoji": "\ud83d\udfe5",
+            "color": "#f85149",
+            "ndvi_range": [
+              0.0,
+              0.2
+            ],
+            "pixel_count": 262144,
+            "total_pct": 100.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "moderate",
+            "emoji": "\ud83d\udfe8",
+            "color": "#e3b341",
+            "ndvi_range": [
+              0.2,
+              0.4
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "healthy",
+            "emoji": "\ud83d\udfe9",
+            "color": "#7ee787",
+            "ndvi_range": [
+              0.4,
+              0.6
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "vigorous",
+            "emoji": "\ud83d\udc9a",
+            "color": "#2ea44f",
+            "ndvi_range": [
+              0.6,
+              1.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          }
+        ]
+      },
+      {
+        "source": "dataset/yolo/images/val/sylhet_2026-10-15.png",
+        "total_pixels": 262144,
+        "vegetation_pixels": 0,
+        "vegetation_coverage_pct": 0.0,
+        "health_score": 0.0,
+        "health_grade": "F \u2014 Critical",
+        "ndvi_statistics": {
+          "mean": 0.0,
+          "std": 0.0,
+          "min": 0.0,
+          "max": 0.0,
+          "median": 0.0
+        },
+        "zone_breakdown": [
+          {
+            "zone": "dead",
+            "emoji": "\u2620\ufe0f",
+            "color": "#6e1423",
+            "ndvi_range": [
+              -1.0,
+              0.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "stressed",
+            "emoji": "\ud83d\udfe5",
+            "color": "#f85149",
+            "ndvi_range": [
+              0.0,
+              0.2
+            ],
+            "pixel_count": 262144,
+            "total_pct": 100.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "moderate",
+            "emoji": "\ud83d\udfe8",
+            "color": "#e3b341",
+            "ndvi_range": [
+              0.2,
+              0.4
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "healthy",
+            "emoji": "\ud83d\udfe9",
+            "color": "#7ee787",
+            "ndvi_range": [
+              0.4,
+              0.6
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          },
+          {
+            "zone": "vigorous",
+            "emoji": "\ud83d\udc9a",
+            "color": "#2ea44f",
+            "ndvi_range": [
+              0.6,
+              1.0
+            ],
+            "pixel_count": 0,
+            "total_pct": 0.0,
+            "vegetation_pct": 0.0
+          }
+        ]
+      }
+    ],
+    "elapsed_sec": 0.04
+  },
+  "tree_count": {
+    "total_tree_count": 10,
+    "tiles_processed": 10,
+    "trees_per_tile_avg": 1.0,
+    "trees_per_hectare": 0.0,
+    "trees_per_km2": 0,
+    "survey_area": {
+      "hectares": 40960.0,
+      "km2": 409.6,
+      "m2": 409600000.0
+    },
+    "crown_statistics": {
+      "avg_crown_area_px": 5065.2,
+      "avg_crown_area_m2": 506518.0
+    },
+    "confidence": {
+      "mean": 0.7169,
+      "min": 0.7169,
+      "max": 0.7171
+    },
+    "per_tile_counts": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "tree_density": {
+    "grid_size": 25,
+    "total_trees": 10,
+    "hotspots": [
+      {
+        "grid_cell": [
+          12,
+          12
+        ],
+        "tree_count": 10,
+        "density_per_ha": 1.5
+      }
+    ],
+    "statistics": {
+      "mean_density_per_ha": 0.0,
+      "max_density_per_ha": 1.53,
+      "std_density_per_ha": 0.06,
+      "cells_with_trees": 1,
+      "cells_total": 625,
+      "spatial_coverage_pct": 0.2
+    }
+  },
+  "land_cover_statistics": {
+    "total_pixels": 2621440,
+    "total_area_ha": 26214.4,
+    "total_area_km2": 262.144,
+    "pixel_counts": {
+      "background": 0,
+      "tree_crown": 0,
+      "forest": 0,
+      "grass": 0,
+      "crop": 0,
+      "water": 0,
+      "bare_soil": 0,
+      "built_up": 0,
+      "road": 0,
+      "cloud": 0,
+      "shadow": 2621440
+    },
+    "percentages": {
+      "background": 0.0,
+      "tree_crown": 0.0,
+      "forest": 0.0,
+      "grass": 0.0,
+      "crop": 0.0,
+      "water": 0.0,
+      "bare_soil": 0.0,
+      "built_up": 0.0,
+      "road": 0.0,
+      "cloud": 0.0,
+      "shadow": 100.0
+    },
+    "areas_hectares": {
+      "background": 0.0,
+      "tree_crown": 0.0,
+      "forest": 0.0,
+      "grass": 0.0,
+      "crop": 0.0,
+      "water": 0.0,
+      "bare_soil": 0.0,
+      "built_up": 0.0,
+      "road": 0.0,
+      "cloud": 0.0,
+      "shadow": 26214.4
+    },
+    "areas_km2": {
+      "background": 0.0,
+      "tree_crown": 0.0,
+      "forest": 0.0,
+      "grass": 0.0,
+      "crop": 0.0,
+      "water": 0.0,
+      "bare_soil": 0.0,
+      "built_up": 0.0,
+      "road": 0.0,
+      "cloud": 0.0,
+      "shadow": 262.144
+    },
+    "key_metrics": {
+      "forest_cover_pct": 0.0,
+      "vegetation_cover_pct": 0.0,
+      "water_coverage_pct": 0.0,
+      "built_up_pct": 0.0,
+      "bare_soil_pct": 0.0,
+      "cloud_pct": 0.0
+    },
+    "num_tiles_analyzed": 10
+  },
+  "biomass_carbon": {
+    "forest_type": "tropical_broadleaf",
+    "allometric_model": "Biomass = 5.83 \u00d7 CrownArea^1.27",
+    "total_trees": 10,
+    "total_crown_area_m2": 5065180.0,
+    "biomass": {
+      "total_kg": 1024481741.4,
+      "total_tonnes": 1024481.741,
+      "per_tree_avg_kg": 102448174.14
+    },
+    "carbon_storage": {
+      "total_kg": 481506418.46,
+      "total_tonnes": 481506.418,
+      "conversion_factor": 0.47
+    },
+    "co2_equivalent": {
+      "total_kg": 1767128555.74,
+      "total_tonnes": 1767128.556,
+      "conversion_factor": 3.67
+    },
+    "crown_statistics": {
+      "avg_crown_area_m2": 506518.0,
+      "total_crown_area_ha": 506.518
+    }
+  },
+  "gis_analytics_elapsed_sec": 0.0,
+  "pipeline_elapsed_sec": 0.91
+}

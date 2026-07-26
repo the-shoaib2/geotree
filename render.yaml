@@ -1,0 +1,14 @@
+# Render Infrastructure Blueprint Configuration
+services:
+  - type: web
+    name: geotree-platform
+    env: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: PYTHONUNBUFFERED
+        value: "1"
+    autoDeploy: true

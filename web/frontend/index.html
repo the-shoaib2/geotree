@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoTree — Live Bangladesh Tree & GIS Analytics Platform</title>
+
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Leaflet CSS & Leaflet Draw -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+    <!-- Header Navigation Bar -->
+    <header>
+        <div class="logo-container">
+            <i class="fa-solid font-awesome-logo-full fa-tree" style="color: #2ea44f; font-size: 22px;"></i>
+            <span class="logo-title">GeoTree AI</span>
+            <span class="logo-badge">BANGLADESH LIVE</span>
+        </div>
+
+        <div class="nav-region-selector" id="regionSelector">
+            <span style="font-size: 12px; color: var(--text-muted); margin-right: 4px;">Quick Regions:</span>
+            <button class="region-btn active" onclick="loadRegion('sundarbans')">Sundarbans</button>
+            <button class="region-btn" onclick="loadRegion('sylhet')">Sylhet</button>
+            <button class="region-btn" onclick="loadRegion('chittagong')">Chittagong</button>
+            <button class="region-btn" onclick="loadRegion('rangamati')">Rangamati</button>
+            <button class="region-btn" onclick="loadRegion('gazipur')">Gazipur</button>
+            <button class="region-btn" onclick="loadRegion('coxs_bazar')">Cox's Bazar</button>
+        </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <div class="main-content">
+        
+        <!-- Interactive Leaflet Map -->
+        <div id="map"></div>
+
+        <!-- Real-Time Side Analytics Panel -->
+        <div class="analytics-panel">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span id="regionTitle">Sundarbans Mangrove Region</span>
+                </div>
+                <div class="panel-subtitle" id="regionSubtitle">Select any rectangle/polygon area on the map to analyze in real time</div>
+            </div>
+
+            <!-- Key Metrics Grid -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-lbl">Total Trees</div>
+                    <div class="metric-val" id="valTotalTrees" style="color: #58a6ff;">--</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-lbl">Density (Trees/ha)</div>
+                    <div class="metric-val" id="valDensity" style="color: #7ee787;">--</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-lbl">Survey Area</div>
+                    <div class="metric-val" id="valArea" style="color: #e3b341;">-- ha</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-lbl">Carbon Storage</div>
+                    <div class="metric-val" id="valCarbon" style="color: #2ea44f;">-- t</div>
+                </div>
+            </div>
+
+            <!-- Vegetation Health Box -->
+            <div class="health-box">
+                <div class="health-score-badge" id="healthBadge">--</div>
+                <div class="health-info">
+                    <div class="health-grade-txt" id="healthGrade">Health Grade: Loading...</div>
+                    <div class="health-ndvi-txt" id="healthNdvi">Mean NDVI: --</div>
+                </div>
+            </div>
+
+            <!-- Land Cover Breakdown -->
+            <div style="background: #161b22; border: 1px solid var(--card-border); border-radius: 10px; padding: 16px;">
+                <div style="font-size: 13px; font-weight: 700; margin-bottom: 12px; color: var(--text-main);">
+                    <i class="fa-solid fa-layer-group" style="margin-right: 6px; color: var(--accent-blue);"></i>
+                    Land Cover Distribution
+                </div>
+
+                <div class="dist-item">
+                    <div class="dist-header"><span>🌲 Forest Canopy</span><span id="pctForest">0%</span></div>
+                    <div class="dist-bar-bg"><div class="dist-bar-fill" id="barForest" style="width: 0%; background: #2ea44f;"></div></div>
+                </div>
+                <div class="dist-item">
+                    <div class="dist-header"><span>🌱 Grass & Crops</span><span id="pctVeg">0%</span></div>
+                    <div class="dist-bar-bg"><div class="dist-bar-fill" id="barVeg" style="width: 0%; background: #7ee787;"></div></div>
+                </div>
+                <div class="dist-item">
+                    <div class="dist-header"><span>💧 Water Bodies</span><span id="pctWater">0%</span></div>
+                    <div class="dist-bar-bg"><div class="dist-bar-fill" id="barWater" style="width: 0%; background: #58a6ff;"></div></div>
+                </div>
+                <div class="dist-item">
+                    <div class="dist-header"><span>🏠 Built-up & Infrastructure</span><span id="pctBuilt">0%</span></div>
+                    <div class="dist-bar-bg"><div class="dist-bar-fill" id="barBuilt" style="width: 0%; background: #f85149;"></div></div>
+                </div>
+                <div class="dist-item">
+                    <div class="dist-header"><span>🪨 Bare Soil</span><span id="pctBare">0%</span></div>
+                    <div class="dist-bar-bg"><div class="dist-bar-fill" id="barBare" style="width: 0%; background: #e3b341;"></div></div>
+                </div>
+            </div>
+
+            <!-- Carbon & Biomass Stats -->
+            <div style="background: #161b22; border: 1px solid var(--card-border); border-radius: 10px; padding: 16px;">
+                <div style="font-size: 13px; font-weight: 700; margin-bottom: 10px; color: var(--text-main);">
+                    <i class="fa-solid fa-leaf" style="margin-right: 6px; color: var(--accent-green);"></i>
+                    Biomass & CO₂ Analytics
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 12px; padding: 6px 0; border-bottom: 1px solid #21262d;">
+                    <span style="color: var(--text-muted);">Est. Above Ground Biomass</span>
+                    <span id="valBiomass" style="font-weight: 700; color: #7ee787;">-- t</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 12px; padding: 6px 0; border-bottom: 1px solid #21262d;">
+                    <span style="color: var(--text-muted);">CO₂ Equivalent Offset</span>
+                    <span id="valCo2" style="font-weight: 700; color: #e3b341;">-- t</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 12px; padding: 6px 0;">
+                    <span style="color: var(--text-muted);">Allometric Equation</span>
+                    <span style="color: var(--text-main);">Pantropical Broadleaf</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    <script src="/static/js/app.js"></script>
+
+</body>
+</html>

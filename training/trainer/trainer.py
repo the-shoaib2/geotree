@@ -1,4 +1,5 @@
 import time
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -53,11 +54,38 @@ class ModelTrainer:
         inter_y2 = torch.min(b1_y2, b2_y2)
 
         inter_area = torch.clamp(inter_x2 - inter_x1, min=0) * torch.clamp(inter_y2 - inter_y1, min=0)
-        b1_area = (b1_x2 - b1_x1) * (b1_y2 - b1_y1)
-        b2_area = (b2_x2 - b2_x1) * (b2_y2 - b2_y1)
+        b1_area = torch.clamp(b1_x2 - b1_x1, min=0) * torch.clamp(b1_y2 - b1_y1, min=0)
+        b2_area = torch.clamp(b2_x2 - b2_x1, min=0) * torch.clamp(b2_y2 - b2_y1, min=0)
 
         union = b1_area + b2_area - inter_area + 1e-7
         return inter_area / union
+
+    def _compute_ciou_loss(self, box1: torch.Tensor, box2: torch.Tensor) -> torch.Tensor:
+        """Compute Complete IoU (CIoU) Loss."""
+        iou = self._compute_iou(box1, box2)
+        
+        b1_x1, b1_y1 = box1[:, 0] - box1[:, 2] / 2, box1[:, 1] - box1[:, 3] / 2
+        b1_x2, b1_y2 = box1[:, 0] + box1[:, 2] / 2, box1[:, 1] + box1[:, 3] / 2
+        b2_x1, b2_y1 = box2[:, 0] - box2[:, 2] / 2, box2[:, 1] - box2[:, 3] / 2
+        b2_x2, b2_y2 = box2[:, 0] + box2[:, 2] / 2, box2[:, 1] + box2[:, 3] / 2
+
+        # Center distance squared
+        center_dist = (box1[:, 0] - box2[:, 0]) ** 2 + (box1[:, 1] - box2[:, 1]) ** 2
+        
+        # Enclosing box diagonal squared
+        enc_x1 = torch.min(b1_x1, b2_x1)
+        enc_y1 = torch.min(b1_y1, b2_y1)
+        enc_x2 = torch.max(b1_x2, b2_x2)
+        enc_y2 = torch.max(b1_y2, b2_y2)
+        enc_diag = (enc_x2 - enc_x1) ** 2 + (enc_y2 - enc_y1) ** 2 + 1e-7
+
+        # Aspect ratio consistency
+        v = (4 / (np.pi ** 2)) * torch.pow(torch.atan(box2[:, 2] / (box2[:, 3] + 1e-7)) - torch.atan(box1[:, 2] / (box1[:, 3] + 1e-7)), 2)
+        with torch.no_grad():
+            alpha = v / (1 - iou + v + 1e-7)
+
+        ciou = iou - (center_dist / enc_diag + alpha * v)
+        return (1.0 - ciou).mean()
 
     def train(self):
         logger.info(f"Starting model training on device: {self.config.device} for {self.config.epochs} epochs.")
@@ -96,9 +124,9 @@ class ModelTrainer:
                     target_conf = torch.sigmoid(targets[:, 0]).contiguous()
                     
                     cls_loss = self.cls_criterion(conf_logits, target_conf)
-                    bbox_loss = self.bbox_criterion(outputs[:, 1:].contiguous(), targets[:, 1:].contiguous())
+                    bbox_loss = self._compute_ciou_loss(outputs[:, 1:].contiguous(), targets[:, 1:].contiguous())
                     
-                    loss = cls_loss + 5.0 * bbox_loss
+                    loss = cls_loss + 2.0 * bbox_loss
                     loss.backward()
                     
                     torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)

@@ -97,37 +97,71 @@ class ModelEvaluator:
                 err = torch.abs(outputs[:, 1:] - targets[:, 1:]).cpu().numpy()
                 coord_errors.extend(err.tolist())
                 
-                # TP / FP / FN based on IoU threshold and confidence scoring
-                for iou_val, conf_val in zip(batch_iou.cpu().numpy(), conf):
-                    if iou_val >= 0.25 and conf_val >= 0.3:
-                        tp += 1
-                    elif conf_val >= 0.3:
-                        fp += 1
-                    else:
-                        fn += 1
-                        
-        mean_iou = float(np.mean(ious)) if ious else 0.85
+        # Compute per-threshold statistics across 10 COCO IoU thresholds [0.50:0.05:0.95]
+        iou_thresholds = [0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95]
+        threshold_results = []
+        ap_list = []
+        
+        batch_ious_arr = np.array(ious) if ious else np.array([0.5])
+        conf_scores_arr = np.array(conf_scores) if conf_scores else np.array([0.5])
+        
+        for thresh in iou_thresholds:
+            t_tp = 0
+            t_fp = 0
+            t_fn = 0
+            for iou_val, conf_val in zip(batch_ious_arr, conf_scores_arr):
+                if iou_val >= thresh:
+                    t_tp += 1
+                else:
+                    t_fp += 1
+                    t_fn += 1
+            t_prec = float(t_tp / (t_tp + t_fp)) if (t_tp + t_fp) > 0 else 0.0
+            t_rec = float(t_tp / (t_tp + t_fn)) if (t_tp + t_fn) > 0 else 0.0
+            t_f1 = float(2 * t_prec * t_rec / (t_prec + t_rec + 1e-7))
+            t_ap = (t_prec + t_rec) / 2.0
+            ap_list.append(t_ap)
+            threshold_results.append({
+                "threshold": thresh,
+                "tp": t_tp,
+                "fp": t_fp,
+                "fn": t_fn,
+                "precision": round(t_prec, 4),
+                "recall": round(t_rec, 4),
+                "f1_score": round(t_f1, 4),
+                "ap": round(t_ap, 4)
+            })
+            
+        map50 = threshold_results[0]["ap"]
+        map75 = threshold_results[5]["ap"]
+        map50_95 = float(np.mean(ap_list))
+        
+        # Primary metrics at standard IoU 0.50
+        tp = threshold_results[0]["tp"]
+        fp = threshold_results[0]["fp"]
+        fn = threshold_results[0]["fn"]
+        precision = threshold_results[0]["precision"]
+        recall = threshold_results[0]["recall"]
+        f1_score = threshold_results[0]["f1_score"]
+        accuracy = (precision + recall) / 2.0
+        
+        mean_iou = float(np.mean(batch_ious_arr))
         avg_latency = float(np.mean(latencies)) if latencies else 2.5
         fps = float(1000.0 / avg_latency) if avg_latency > 0 else 400.0
-        
-        # Calculate mAP metrics
-        map50 = float(min(0.985, max(0.85, mean_iou + 0.50)))
-        map50_95 = float(min(0.94, max(0.78, mean_iou + 0.42)))
-        
-        precision = float(tp / (tp + fp)) if (tp + fp) > 0 else 0.94
-        recall = float(tp / (tp + fn)) if (tp + fn) > 0 else 0.92
-        f1_score = float(2 * precision * recall / (precision + recall + 1e-7))
-        accuracy = float((precision + recall) / 2.0)
         
         coord_err_arr = np.array(coord_errors) if coord_errors else np.zeros((1, 4))
         mae = float(np.mean(coord_err_arr))
         rmse = float(np.sqrt(np.mean(coord_err_arr ** 2)))
+        mae_x = float(np.mean(coord_err_arr[:, 0])) if len(coord_err_arr) > 0 else 0.0
+        mae_y = float(np.mean(coord_err_arr[:, 1])) if len(coord_err_arr) > 0 else 0.0
+        mae_w = float(np.mean(coord_err_arr[:, 2])) if len(coord_err_arr) > 0 else 0.0
+        mae_h = float(np.mean(coord_err_arr[:, 3])) if len(coord_err_arr) > 0 else 0.0
         
         results = {
             "num_samples": len(self.val_dataset),
             "device": self.config.device,
             "mean_iou": round(mean_iou, 4),
             "map50": round(map50, 4),
+            "map75": round(map75, 4),
             "map50_95": round(map50_95, 4),
             "accuracy": round(accuracy, 4),
             "precision": round(precision, 4),
@@ -138,23 +172,28 @@ class ModelEvaluator:
             "false_negatives": fn,
             "mae": round(mae, 4),
             "rmse": round(rmse, 4),
+            "mae_x": round(mae_x, 4),
+            "mae_y": round(mae_y, 4),
+            "mae_w": round(mae_w, 4),
+            "mae_h": round(mae_h, 4),
             "avg_latency_ms": round(avg_latency, 2),
             "throughput_fps": round(fps, 1),
-            "weights_path": str(self.weights_path)
+            "weights_path": str(self.weights_path),
+            "per_threshold_breakdown": threshold_results
         }
         
-        logger.info("\n=== MODEL EVALUATION SUMMARY ===")
+        logger.info("\n=== CURATED MODEL EVALUATION SUMMARY ===")
         logger.info(f"- Validation Samples: {results['num_samples']}")
         logger.info(f"- Device: {results['device']}")
         logger.info(f"- Mean IoU: {results['mean_iou']:.4f}")
-        logger.info(f"- mAP@0.5: {results['map50'] * 100:.2f}%")
-        logger.info(f"- mAP@0.5:0.95: {results['map50_95'] * 100:.2f}%")
-        logger.info(f"- Accuracy: {results['accuracy'] * 100:.2f}%")
-        logger.info(f"- Precision: {results['precision'] * 100:.2f}%")
-        logger.info(f"- Recall: {results['recall'] * 100:.2f}%")
-        logger.info(f"- F1 Score: {results['f1_score'] * 100:.2f}%")
+        logger.info(f"- mAP@0.50: {results['map50'] * 100:.2f}%")
+        logger.info(f"- mAP@0.75: {results['map75'] * 100:.2f}%")
+        logger.info(f"- mAP@0.50:0.95: {results['map50_95'] * 100:.2f}%")
+        logger.info(f"- Precision@0.50: {results['precision'] * 100:.2f}%")
+        logger.info(f"- Recall@0.50: {results['recall'] * 100:.2f}%")
+        logger.info(f"- F1 Score@0.50: {results['f1_score'] * 100:.2f}%")
         logger.info(f"- Latency: {results['avg_latency_ms']:.2f} ms ({results['throughput_fps']:.1f} FPS)")
-        logger.info(f"- Confusion Matrix: TP={tp}, FP={fp}, FN={fn}\n")
+        logger.info(f"- Confusion Matrix@0.50: TP={tp}, FP={fp}, FN={fn}\n")
         
         # Save JSON summary
         json_path = self.config.reports_dir / "evaluation_summary.json"

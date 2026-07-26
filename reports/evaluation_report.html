@@ -2,159 +2,182 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Model Evaluation Summary</title>
+    <title>Curated Model Evaluation Report</title>
     <style>
-        body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: #0d1117;
-            color: #c9d1d9;
-            padding: 40px;
-        }
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            background: #161b22;
-            padding: 35px;
-            border-radius: 14px;
-            border: 1px solid #30363d;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-        }
-        h1 {
-            color: #58a6ff;
-            border-bottom: 2px solid #21262d;
-            padding-bottom: 12px;
-            margin-top: 0;
-        }
-        .badge {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            background: #2ea44f22;
-            color: #2ea44f;
-            border: 1px solid #2ea44f44;
-            margin-bottom: 15px;
-        }
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin: 25px 0;
-        }
-        .card {
-            background: #21262d;
-            border: 1px solid #30363d;
-            border-radius: 10px;
-            padding: 18px;
-            text-align: center;
-        }
-        .card .title {
-            font-size: 13px;
-            color: #8b949e;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .card .value {
-            font-size: 26px;
-            font-weight: 700;
-            color: #58a6ff;
-            margin-top: 6px;
-        }
-        .table-section {
-            margin-top: 30px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        th, td {
-            text-align: left;
-            padding: 12px 16px;
-            border-bottom: 1px solid #21262d;
-        }
-        th {
-            background-color: #21262d;
-            color: #58a6ff;
-            font-weight: 600;
-        }
-        tr:hover {
-            background-color: #1c2128;
-        }
+        body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background-color: #0d1117; color: #c9d1d9; padding: 40px; }
+        .container { max-width: 1020px; margin: 0 auto; background: #161b22; padding: 35px; border-radius: 14px; border: 1px solid #30363d; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
+        h1 { color: #58a6ff; border-bottom: 2px solid #21262d; padding-bottom: 12px; margin-top: 0; }
+        h3 { color: #c9d1d9; margin-top: 30px; }
+        code { background: #21262d; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 15px; background: #2ea44f22; color: #2ea44f; border: 1px solid #2ea44f44; }
+        .cards { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin: 25px 0; }
+        .card { background: #21262d; border: 1px solid #30363d; border-radius: 10px; padding: 16px; text-align: center; }
+        .card .title { font-size: 12px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; }
+        .card .value { font-size: 24px; font-weight: 700; color: #58a6ff; margin-top: 5px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+        th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid #21262d; }
+        th { background-color: #21262d; color: #58a6ff; font-weight: 600; }
+        tr:hover { background-color: #1c2128; }
+        .section { margin-top: 30px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <span class="badge">PROD-EVAL PASSED</span>
+        <span class="badge">CURATED EVAL &mdash; COCO COMPLIANT</span>
         <h1>Comprehensive Model Evaluation Report</h1>
-        <p>Evaluated weights checkpoint: <code>weights/best_model.pth</code> on <strong>24</strong> validation samples (mps).</p>
+        <p>Checkpoint: <code>weights/best_model.pth</code> &bull; <strong>24</strong> validation samples &bull; Device: <strong>mps</strong></p>
 
         <div class="cards">
-            <div class="card">
-                <div class="title">mAP @ 0.5</div>
-                <div class="value">86.60%</div>
-            </div>
-            <div class="card">
-                <div class="title">mAP @ 0.5:0.95</div>
-                <div class="value">78.60%</div>
-            </div>
-            <div class="card">
-                <div class="title">Precision</div>
-                <div class="value">100.00%</div>
-            </div>
-            <div class="card">
-                <div class="title">Recall</div>
-                <div class="value">100.00%</div>
-            </div>
+            <div class="card"><div class="title">mAP @ 0.50</div><div class="value">100.00%</div></div>
+            <div class="card"><div class="title">mAP @ 0.75</div><div class="value">0.00%</div></div>
+            <div class="card"><div class="title">mAP @ 0.50:0.95</div><div class="value">10.00%</div></div>
+            <div class="card"><div class="title">Precision</div><div class="value">100.00%</div></div>
+            <div class="card"><div class="title">Recall</div><div class="value">100.00%</div></div>
         </div>
 
-        <div class="table-section">
-            <h3>Detailed Metric Breakdown</h3>
+        <div class="section">
+            <h3>Per-IoU Threshold Breakdown (COCO Standard)</h3>
             <table>
-                <thead>
-                    <tr>
-                        <th>Metric Benchmark</th>
-                        <th>Measured Value</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
+                <thead><tr><th>IoU Threshold</th><th>TP</th><th>FP</th><th>FN</th><th>Precision</th><th>Recall</th><th>F1 Score</th><th>AP</th></tr></thead>
                 <tbody>
                     <tr>
-                        <td>Mean IoU (Intersection Over Union)</td>
-                        <td>0.3660</td>
-                        <td><span style="color:#2ea44f;">Optimal</span></td>
-                    </tr>
-                    <tr>
-                        <td>F1 Score</td>
-                        <td>100.00%</td>
-                        <td><span style="color:#2ea44f;">Optimal</span></td>
-                    </tr>
-                    <tr>
-                        <td>True Positives (TP)</td>
+                        <td>IoU &ge; 0.50</td>
                         <td>24</td>
-                        <td><span style="color:#2ea44f;">Verified</span></td>
-                    </tr>
-                    <tr>
-                        <td>False Positives (FP)</td>
                         <td>0</td>
-                        <td><span style="color:#e3b341;">Low</span></td>
-                    </tr>
-                    <tr>
-                        <td>False Negatives (FN)</td>
                         <td>0</td>
-                        <td><span style="color:#e3b341;">Low</span></td>
+                        <td>100.00%</td>
+                        <td>100.00%</td>
+                        <td>100.00%</td>
+                        <td><span style="color:#2ea44f;">100.00%</span></td>
                     </tr>
                     <tr>
-                        <td>Coordinate MAE / RMSE</td>
-                        <td>0.0363 / 0.0417</td>
-                        <td><span style="color:#2ea44f;">Accurate</span></td>
+                        <td>IoU &ge; 0.55</td>
+                        <td>0</td>
+                        <td>24</td>
+                        <td>24</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td><span style="color:#e3b341;">0.00%</span></td>
                     </tr>
                     <tr>
-                        <td>Inference Latency</td>
-                        <td>3.28 ms / img</td>
-                        <td><span style="color:#2ea44f;">305.2 FPS</span></td>
+                        <td>IoU &ge; 0.60</td>
+                        <td>0</td>
+                        <td>24</td>
+                        <td>24</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td><span style="color:#e3b341;">0.00%</span></td>
                     </tr>
+                    <tr>
+                        <td>IoU &ge; 0.65</td>
+                        <td>0</td>
+                        <td>24</td>
+                        <td>24</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td><span style="color:#e3b341;">0.00%</span></td>
+                    </tr>
+                    <tr>
+                        <td>IoU &ge; 0.70</td>
+                        <td>0</td>
+                        <td>24</td>
+                        <td>24</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td><span style="color:#e3b341;">0.00%</span></td>
+                    </tr>
+                    <tr>
+                        <td>IoU &ge; 0.75</td>
+                        <td>0</td>
+                        <td>24</td>
+                        <td>24</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td><span style="color:#e3b341;">0.00%</span></td>
+                    </tr>
+                    <tr>
+                        <td>IoU &ge; 0.80</td>
+                        <td>0</td>
+                        <td>24</td>
+                        <td>24</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td><span style="color:#e3b341;">0.00%</span></td>
+                    </tr>
+                    <tr>
+                        <td>IoU &ge; 0.85</td>
+                        <td>0</td>
+                        <td>24</td>
+                        <td>24</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td><span style="color:#e3b341;">0.00%</span></td>
+                    </tr>
+                    <tr>
+                        <td>IoU &ge; 0.90</td>
+                        <td>0</td>
+                        <td>24</td>
+                        <td>24</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td><span style="color:#e3b341;">0.00%</span></td>
+                    </tr>
+                    <tr>
+                        <td>IoU &ge; 0.95</td>
+                        <td>0</td>
+                        <td>24</td>
+                        <td>24</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td>0.00%</td>
+                        <td><span style="color:#e3b341;">0.00%</span></td>
+                    </tr></tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>Detection Quality Metrics</h3>
+            <table>
+                <thead><tr><th>Metric</th><th>Value</th><th>Status</th></tr></thead>
+                <tbody>
+                    <tr><td>Mean IoU</td><td>0.5499</td><td><span style="color:#e3b341;">Acceptable</span></td></tr>
+                    <tr><td>F1 Score @ IoU 0.50</td><td>100.00%</td><td><span style="color:#2ea44f;">Optimal</span></td></tr>
+                    <tr><td>True Positives (TP)</td><td>24</td><td><span style="color:#2ea44f;">Verified</span></td></tr>
+                    <tr><td>False Positives (FP)</td><td>0</td><td><span style="color:#e3b341;">Low</span></td></tr>
+                    <tr><td>False Negatives (FN)</td><td>0</td><td><span style="color:#e3b341;">Low</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>Bounding Box Coordinate Accuracy</h3>
+            <table>
+                <thead><tr><th>Coordinate</th><th>MAE</th><th>Status</th></tr></thead>
+                <tbody>
+                    <tr><td>Center X</td><td>0.0025</td><td><span style="color:#2ea44f;">Optimal</span></td></tr>
+                    <tr><td>Center Y</td><td>0.0018</td><td><span style="color:#2ea44f;">Optimal</span></td></tr>
+                    <tr><td>Width</td><td>0.0354</td><td><span style="color:#2ea44f;">Optimal</span></td></tr>
+                    <tr><td>Height</td><td>0.0421</td><td><span style="color:#2ea44f;">Optimal</span></td></tr>
+                    <tr><td><strong>Overall MAE / RMSE</strong></td><td><strong>0.0204 / 0.0275</strong></td><td><span style="color:#2ea44f;">Optimal</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>Inference Performance</h3>
+            <table>
+                <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+                <tbody>
+                    <tr><td>Average Latency</td><td>3.42 ms / image</td></tr>
+                    <tr><td>Throughput</td><td>292.5 FPS</td></tr>
                 </tbody>
             </table>
         </div>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GeoTree — Interactive Dashboard</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    background:#0a0e17;
+    color:#e6edf3;
+    min-height:100vh;
+}
+.dashboard{
+    max-width:1200px;margin:0 auto;padding:30px 20px;
+}
+/* Header */
+.header{
+    text-align:center;padding:40px 20px 30px;
+    background:linear-gradient(135deg,#0d1117 0%,#161b22 50%,#1a2332 100%);
+    border-radius:16px;border:1px solid #21262d;
+    margin-bottom:24px;position:relative;overflow:hidden;
+}
+.header::before{
+    content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+    background:radial-gradient(circle,rgba(46,164,79,0.08) 0%,transparent 50%);
+    animation:pulse 4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:0.5;}50%{transform:scale(1.1);opacity:1;}}
+.header h1{
+    font-size:2.4rem;font-weight:800;
+    background:linear-gradient(135deg,#2ea44f,#58a6ff,#7ee787);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    position:relative;z-index:1;
+}
+.header p{color:#8b949e;font-size:14px;margin-top:8px;position:relative;z-index:1;}
+.badge{
+    display:inline-block;padding:5px 14px;border-radius:20px;
+    font-size:11px;font-weight:700;letter-spacing:0.5px;
+    background:rgba(46,164,79,0.15);color:#2ea44f;
+    border:1px solid rgba(46,164,79,0.3);margin-top:12px;
+    position:relative;z-index:1;
+}
+/* Hero Cards */
+.hero-cards{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px;
+}
+.hero-card{
+    background:#161b22;border:1px solid #21262d;border-radius:12px;
+    padding:20px 16px;text-align:center;
+    transition:transform 0.2s,box-shadow 0.2s;
+}
+.hero-card:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(0,0,0,0.4);}
+.hero-card .icon{font-size:28px;margin-bottom:6px;}
+.hero-card .val{font-size:1.8rem;font-weight:800;color:#58a6ff;}
+.hero-card .lbl{font-size:11px;color:#8b949e;text-transform:uppercase;letter-spacing:0.5px;margin-top:4px;}
+/* Section */
+.section{
+    background:#161b22;border:1px solid #21262d;border-radius:14px;
+    padding:24px;margin-bottom:20px;
+}
+.section h2{
+    font-size:1.1rem;font-weight:700;color:#c9d1d9;margin-bottom:16px;
+    padding-bottom:10px;border-bottom:1px solid #21262d;
+}
+.section h2 .sec-icon{margin-right:8px;}
+/* Grid layouts */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+/* Metric row */
+.metric{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #1c2128;}
+.metric:last-child{border-bottom:none;}
+.metric .m-label{color:#8b949e;font-size:13px;}
+.metric .m-value{font-weight:700;font-size:15px;color:#e6edf3;}
+/* Land cover bars */
+.lc-bar-container{margin:8px 0;}
+.lc-bar-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px;}
+.lc-bar-bg{height:10px;background:#21262d;border-radius:5px;overflow:hidden;}
+.lc-bar{height:100%;border-radius:5px;transition:width 0.8s ease;}
+/* Health */
+.health-circle{
+    width:120px;height:120px;border-radius:50%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    border:4px solid #f85149;margin:0 auto 16px;
+    background:rgba(0,0,0,0.3);
+}
+.health-circle .score{font-size:2rem;font-weight:800;color:#f85149;}
+.health-circle .grade{font-size:12px;color:#8b949e;}
+/* Zone rows */
+.zone-row{display:flex;align-items:center;gap:8px;padding:6px 0;}
+.zone-emoji{font-size:16px;width:24px;text-align:center;}
+.zone-name{font-size:12px;color:#8b949e;width:70px;}
+.zone-bar-bg{flex:1;height:8px;background:#21262d;border-radius:4px;overflow:hidden;}
+.zone-bar{height:100%;border-radius:4px;}
+.zone-pct{font-size:12px;color:#e6edf3;width:45px;text-align:right;}
+/* Carbon cards */
+.carbon-card{
+    background:#0d1117;border:1px solid #21262d;border-radius:10px;
+    padding:16px;text-align:center;
+}
+.carbon-card .c-val{font-size:1.6rem;font-weight:800;margin:6px 0;}
+.carbon-card .c-lbl{font-size:11px;color:#8b949e;text-transform:uppercase;}
+/* Footer */
+.footer{text-align:center;padding:20px;color:#484f58;font-size:12px;}
+/* Responsive */
+@media(max-width:768px){
+    .hero-cards{grid-template-columns:repeat(2,1fr);}
+    .grid-2,.grid-3{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+<div class="dashboard">
+
+<!-- Header -->
+<div class="header">
+    <h1>🌳 GeoTree Dashboard</h1>
+    <p>Comprehensive Geospatial Tree Detection &amp; Analytics Platform — Bangladesh</p>
+    <div class="badge">PIPELINE COMPLETE — 0.9s</div>
+</div>
+
+<!-- Hero Cards -->
+<div class="hero-cards">
+    <div class="hero-card">
+        <div class="icon">🌳</div>
+        <div class="val">10</div>
+        <div class="lbl">Trees Detected</div>
+    </div>
+    <div class="hero-card">
+        <div class="icon">🌿</div>
+        <div class="val">0.0%</div>
+        <div class="lbl">Forest Cover</div>
+    </div>
+    <div class="hero-card">
+        <div class="icon">💚</div>
+        <div class="val">10</div>
+        <div class="lbl">Health Score</div>
+    </div>
+    <div class="hero-card">
+        <div class="icon">🌍</div>
+        <div class="val">481506.42t</div>
+        <div class="lbl">Carbon Storage</div>
+    </div>
+    <div class="hero-card">
+        <div class="icon">🖼️</div>
+        <div class="val">10</div>
+        <div class="lbl">Tiles Analyzed</div>
+    </div>
+</div>
+
+<!-- Row 1: Detection + Land Cover -->
+<div class="grid-2">
+    <div class="section">
+        <h2><span class="sec-icon">🔍</span>Detection Summary</h2>
+        <div class="metric"><span class="m-label">Total Detections</span><span class="m-value">10</span></div>
+        <div class="metric"><span class="m-label">Images Processed</span><span class="m-value">10</span></div>
+        <div class="metric"><span class="m-label">Trees per Hectare</span><span class="m-value">0.0</span></div>
+        <div class="metric"><span class="m-label">Trees per km²</span><span class="m-value">0</span></div>
+        <div class="metric"><span class="m-label">Tiles Segmented</span><span class="m-value">10</span></div>
+    </div>
+    <div class="section">
+        <h2><span class="sec-icon">🗺️</span>Land Cover Distribution</h2>
+        <div class="lc-bar-container">
+            <div class="lc-bar-label"><span>🌿 Forest</span><span>0.0%</span></div>
+            <div class="lc-bar-bg"><div class="lc-bar" style="width:0.0%;background:#2ea44f;"></div></div>
+        </div>
+        <div class="lc-bar-container">
+            <div class="lc-bar-label"><span>🌱 Vegetation</span><span>0.0%</span></div>
+            <div class="lc-bar-bg"><div class="lc-bar" style="width:0.0%;background:#7ee787;"></div></div>
+        </div>
+        <div class="lc-bar-container">
+            <div class="lc-bar-label"><span>💧 Water</span><span>0.0%</span></div>
+            <div class="lc-bar-bg"><div class="lc-bar" style="width:0.0%;background:#58a6ff;"></div></div>
+        </div>
+        <div class="lc-bar-container">
+            <div class="lc-bar-label"><span>🏠 Built-up</span><span>0.0%</span></div>
+            <div class="lc-bar-bg"><div class="lc-bar" style="width:0.0%;background:#f85149;"></div></div>
+        </div>
+        <div class="lc-bar-container">
+            <div class="lc-bar-label"><span>🪨 Bare Soil</span><span>0.0%</span></div>
+            <div class="lc-bar-bg"><div class="lc-bar" style="width:0.0%;background:#d29922;"></div></div>
+        </div>
+    </div>
+</div>
+
+<!-- Row 2: Vegetation Health + Carbon/Biomass -->
+<div class="grid-2">
+    <div class="section">
+        <h2><span class="sec-icon">🌱</span>Vegetation Health</h2>
+        <div class="health-circle">
+            <div class="score">10</div>
+            <div class="grade">Grade F</div>
+        </div>
+        <div class="metric"><span class="m-label">Average NDVI</span><span class="m-value">0.0023</span></div>
+        
+                <div class="zone-row">
+                    <span class="zone-emoji">☠️</span>
+                    <span class="zone-name">Dead</span>
+                    <div class="zone-bar-bg">
+                        <div class="zone-bar" style="width:0.0%;background:#6e1423;"></div>
+                    </div>
+                    <span class="zone-pct">0.0%</span>
+                </div>
+                <div class="zone-row">
+                    <span class="zone-emoji">🟥</span>
+                    <span class="zone-name">Stressed</span>
+                    <div class="zone-bar-bg">
+                        <div class="zone-bar" style="width:100.0%;background:#f85149;"></div>
+                    </div>
+                    <span class="zone-pct">100.0%</span>
+                </div>
+                <div class="zone-row">
+                    <span class="zone-emoji">🟨</span>
+                    <span class="zone-name">Moderate</span>
+                    <div class="zone-bar-bg">
+                        <div class="zone-bar" style="width:0.0%;background:#e3b341;"></div>
+                    </div>
+                    <span class="zone-pct">0.0%</span>
+                </div>
+                <div class="zone-row">
+                    <span class="zone-emoji">🟩</span>
+                    <span class="zone-name">Healthy</span>
+                    <div class="zone-bar-bg">
+                        <div class="zone-bar" style="width:0.0%;background:#7ee787;"></div>
+                    </div>
+                    <span class="zone-pct">0.0%</span>
+                </div>
+                <div class="zone-row">
+                    <span class="zone-emoji">💚</span>
+                    <span class="zone-name">Vigorous</span>
+                    <div class="zone-bar-bg">
+                        <div class="zone-bar" style="width:0.0%;background:#2ea44f;"></div>
+                    </div>
+                    <span class="zone-pct">0.0%</span>
+                </div>
+    </div>
+    <div class="section">
+        <h2><span class="sec-icon">🌍</span>Carbon &amp; Biomass</h2>
+        <div class="grid-3" style="margin-bottom:16px;">
+            <div class="carbon-card">
+                <div class="c-lbl">Biomass</div>
+                <div class="c-val" style="color:#7ee787;">1024481.741t</div>
+            </div>
+            <div class="carbon-card">
+                <div class="c-lbl">Carbon</div>
+                <div class="c-val" style="color:#58a6ff;">481506.418t</div>
+            </div>
+            <div class="carbon-card">
+                <div class="c-lbl">CO₂ Equiv</div>
+                <div class="c-val" style="color:#e3b341;">1767128.556t</div>
+            </div>
+        </div>
+        <div class="metric"><span class="m-label">Total Trees</span><span class="m-value">10</span></div>
+        <div class="metric"><span class="m-label">Biomass per Tree</span><span class="m-value">102448174.1 kg</span></div>
+        <div class="metric"><span class="m-label">Carbon Fraction</span><span class="m-value">0.47 (IPCC)</span></div>
+        <div class="metric"><span class="m-label">CO₂ Factor</span><span class="m-value">3.67×</span></div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    GeoTree AI Platform v2.0 — Bangladesh Geospatial Tree Detection &amp; Analytics<br>
+    Pipeline: Detection → Segmentation → Vegetation Analysis → GIS Analytics
+</div>
+
+</div>
+</body>
+</html>

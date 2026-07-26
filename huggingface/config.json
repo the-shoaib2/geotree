@@ -1,0 +1,14 @@
+{
+  "model_name": "geotree",
+  "architectures": [
+    "TreeDetectorModel"
+  ],
+  "model_type": "resnet_conv_detector",
+  "input_size": 640,
+  "channels": 3,
+  "num_classes": 1,
+  "backbone_channels": [32, 64, 128],
+  "activations": "silu",
+  "loss_function": "CIoULoss",
+  "framework": "PyTorch"
+}

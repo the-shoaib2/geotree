@@ -1,6 +1,8 @@
+"""
+GeoTree Model Architecture Definition for Hugging Face Loading
+"""
 import torch
 import torch.nn as nn
-from preprocessing.pipeline.helpers import logger
 
 class ConvResidualBlock(nn.Module):
     def __init__(self, channels: int):
@@ -18,31 +20,30 @@ class ConvResidualBlock(nn.Module):
         return self.act(out + res)
 
 class TreeDetectorModel(nn.Module):
-    """Production-grade Convolutional Neural Network for tree crown detection and segmentation."""
+    """GeoTree Residual Convolutional Neural Network for Tree Crown Detection."""
     def __init__(self, num_classes: int = 1):
         super().__init__()
         self.backbone = nn.Sequential(
             nn.Conv2d(3, 32, kernel_size=3, padding=1, bias=False),
             nn.BatchNorm2d(32),
             nn.SiLU(inplace=True),
-            nn.MaxPool2d(2, 2), # 320x320
+            nn.MaxPool2d(2, 2),
             
             ConvResidualBlock(32),
             
             nn.Conv2d(32, 64, kernel_size=3, padding=1, bias=False),
             nn.BatchNorm2d(64),
             nn.SiLU(inplace=True),
-            nn.MaxPool2d(2, 2), # 160x160
+            nn.MaxPool2d(2, 2),
             
             ConvResidualBlock(64),
             
             nn.Conv2d(64, 128, kernel_size=3, padding=1, bias=False),
             nn.BatchNorm2d(128),
             nn.SiLU(inplace=True),
-            nn.MaxPool2d(2, 2)  # 80x80
+            nn.MaxPool2d(2, 2)
         )
         
-        # Detection branch: outputs bounding box regressors + confidence [cls, x, y, w, h]
         self.detector = nn.Sequential(
             nn.Conv2d(128, 256, kernel_size=3, padding=1),
             nn.BatchNorm2d(256),
@@ -52,25 +53,13 @@ class TreeDetectorModel(nn.Module):
             nn.Linear(256, 128),
             nn.SiLU(inplace=True),
             nn.Dropout(0.1),
-            nn.Linear(128, 5) # outputs: [confidence, x, y, w, h]
+            nn.Linear(128, 5)
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         features = self.backbone(x)
         detections = self.detector(features)
-        # Apply sigmoid to bbox coordinates [x, y, w, h] to bound them in [0, 1]
-        # Keep confidence logit raw for BCEWithLogitsLoss
-        detections = torch.cat([
-            detections[:, :1],  # confidence logit (raw)
-            torch.sigmoid(detections[:, 1:])  # x, y, w, h → [0, 1]
+        return torch.cat([
+            detections[:, :1],
+            torch.sigmoid(detections[:, 1:])
         ], dim=1)
-        return detections
-
-class ModelSelector:
-    def select_best_model(self, dataset_type: str = "detection") -> nn.Module:
-        """Selects and instantiates the optimal AI model based on task type."""
-        logger.info(f"Selecting best model architecture for target task: {dataset_type}")
-        if dataset_type == "detection":
-            return TreeDetectorModel()
-        else:
-            return TreeDetectorModel()
