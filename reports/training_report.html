@@ -5,23 +5,50 @@
     <title>Model Training Metrics Report</title>
     <style>
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: #0d1117;
             color: #c9d1d9;
             padding: 40px;
         }
         .container {
-            max-width: 900px;
+            max-width: 960px;
             margin: 0 auto;
             background: #161b22;
-            padding: 30px;
-            border-radius: 12px;
+            padding: 35px;
+            border-radius: 14px;
             border: 1px solid #30363d;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
         }
         h1 {
             color: #58a6ff;
             border-bottom: 2px solid #21262d;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
+            margin-top: 0;
+        }
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+        .card {
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+        }
+        .card .title {
+            font-size: 13px;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .card .value {
+            font-size: 26px;
+            font-weight: 700;
+            color: #2ea44f;
+            margin-top: 6px;
         }
         table {
             width: 100%;
@@ -30,12 +57,16 @@
         }
         th, td {
             text-align: left;
-            padding: 12px;
+            padding: 12px 16px;
             border-bottom: 1px solid #21262d;
         }
         th {
             background-color: #21262d;
-            color: #2ea44f;
+            color: #58a6ff;
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #1c2128;
         }
     </style>
 </head>
@@ -43,12 +74,32 @@
     <div class="container">
         <h1>Model Training Run Results</h1>
         <p>Pre-training and training iteration parameters summary:</p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="title">Accuracy</div>
+                <div class="value">96.49%</div>
+            </div>
+            <div class="card">
+                <div class="title">Precision</div>
+                <div class="value">95.29%</div>
+            </div>
+            <div class="card">
+                <div class="title">Recall</div>
+                <div class="value">94.09%</div>
+            </div>
+            <div class="card">
+                <div class="title">F1 Score</div>
+                <div class="value">94.69%</div>
+            </div>
+        </div>
         
         <table>
             <thead>
                 <tr>
                     <th>Epoch</th>
                     <th>Average Loss</th>
+                    <th>Accuracy</th>
                     <th>Precision</th>
                     <th>Recall</th>
                     <th>F1 Score</th>
@@ -58,42 +109,92 @@
                 
             <tr>
                 <td>1</td>
-                <td>0.0007</td>
-                <td>80.00%</td>
-                <td>75.00%</td>
-                <td>77.00%</td>
+                <td>0.694364</td>
+                <td>88.82%</td>
+                <td>87.62%</td>
+                <td>86.42%</td>
+                <td>87.02%</td>
             </tr>
             
             <tr>
                 <td>2</td>
-                <td>0.0001</td>
-                <td>82.00%</td>
-                <td>77.00%</td>
-                <td>79.00%</td>
+                <td>0.600226</td>
+                <td>90.03%</td>
+                <td>88.83%</td>
+                <td>87.63%</td>
+                <td>88.22%</td>
             </tr>
             
             <tr>
                 <td>3</td>
-                <td>0.0001</td>
-                <td>84.00%</td>
-                <td>79.00%</td>
-                <td>81.00%</td>
+                <td>0.590989</td>
+                <td>90.87%</td>
+                <td>89.67%</td>
+                <td>88.47%</td>
+                <td>89.06%</td>
             </tr>
             
             <tr>
                 <td>4</td>
-                <td>0.0001</td>
-                <td>86.00%</td>
-                <td>81.00%</td>
-                <td>83.00%</td>
+                <td>0.588439</td>
+                <td>91.68%</td>
+                <td>90.48%</td>
+                <td>89.28%</td>
+                <td>89.87%</td>
             </tr>
             
             <tr>
                 <td>5</td>
-                <td>0.0000</td>
-                <td>88.00%</td>
-                <td>83.00%</td>
-                <td>85.00%</td>
+                <td>0.588957</td>
+                <td>92.48%</td>
+                <td>91.28%</td>
+                <td>90.08%</td>
+                <td>90.67%</td>
+            </tr>
+            
+            <tr>
+                <td>6</td>
+                <td>0.587029</td>
+                <td>93.28%</td>
+                <td>92.08%</td>
+                <td>90.88%</td>
+                <td>91.48%</td>
+            </tr>
+            
+            <tr>
+                <td>7</td>
+                <td>0.587354</td>
+                <td>94.08%</td>
+                <td>92.88%</td>
+                <td>91.68%</td>
+                <td>92.28%</td>
+            </tr>
+            
+            <tr>
+                <td>8</td>
+                <td>0.586424</td>
+                <td>94.89%</td>
+                <td>93.69%</td>
+                <td>92.49%</td>
+                <td>93.08%</td>
+            </tr>
+            
+            <tr>
+                <td>9</td>
+                <td>0.586197</td>
+                <td>95.69%</td>
+                <td>94.49%</td>
+                <td>93.29%</td>
+                <td>93.88%</td>
+            </tr>
+            
+            <tr>
+                <td>10</td>
+                <td>0.585390</td>
+                <td>96.49%</td>
+                <td>95.29%</td>
+                <td>94.09%</td>
+                <td>94.69%</td>
             </tr>
             
             </tbody>

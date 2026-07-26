@@ -25,17 +25,28 @@ class TrainingReporter:
         ensure_dir(output_path.parent)
         
         epochs_row = ""
+        has_acc = "accuracy" in history and len(history["accuracy"]) == len(history["loss"])
+        
         for i in range(len(history["loss"])):
+            acc_cell = f"<td>{history['accuracy'][i]*100:.2f}%</td>" if has_acc else ""
             epochs_row += f"""
             <tr>
                 <td>{i+1}</td>
-                <td>{history['loss'][i]:.4f}</td>
+                <td>{history['loss'][i]:.6f}</td>
+                {acc_cell}
                 <td>{history['precision'][i]*100:.2f}%</td>
                 <td>{history['recall'][i]*100:.2f}%</td>
                 <td>{history['f1_score'][i]*100:.2f}%</td>
             </tr>
             """
             
+        final_acc = f"{history['accuracy'][-1]*100:.2f}%" if has_acc else f"{history['f1_score'][-1]*100:.2f}%"
+        final_prec = f"{history['precision'][-1]*100:.2f}%"
+        final_rec = f"{history['recall'][-1]*100:.2f}%"
+        final_f1 = f"{history['f1_score'][-1]*100:.2f}%"
+            
+        acc_header = "<th>Accuracy</th>" if has_acc else ""
+        
         html_content = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,23 +54,50 @@ class TrainingReporter:
     <title>Model Training Metrics Report</title>
     <style>
         body {{
-            font-family: 'Inter', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: #0d1117;
             color: #c9d1d9;
             padding: 40px;
         }}
         .container {{
-            max-width: 900px;
+            max-width: 960px;
             margin: 0 auto;
             background: #161b22;
-            padding: 30px;
-            border-radius: 12px;
+            padding: 35px;
+            border-radius: 14px;
             border: 1px solid #30363d;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
         }}
         h1 {{
             color: #58a6ff;
             border-bottom: 2px solid #21262d;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
+            margin-top: 0;
+        }}
+        .cards {{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }}
+        .card {{
+            background: #21262d;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 18px;
+            text-align: center;
+        }}
+        .card .title {{
+            font-size: 13px;
+            color: #8b949e;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }}
+        .card .value {{
+            font-size: 26px;
+            font-weight: 700;
+            color: #2ea44f;
+            margin-top: 6px;
         }}
         table {{
             width: 100%;
@@ -68,12 +106,16 @@ class TrainingReporter:
         }}
         th, td {{
             text-align: left;
-            padding: 12px;
+            padding: 12px 16px;
             border-bottom: 1px solid #21262d;
         }}
         th {{
             background-color: #21262d;
-            color: #2ea44f;
+            color: #58a6ff;
+            font-weight: 600;
+        }}
+        tr:hover {{
+            background-color: #1c2128;
         }}
     </style>
 </head>
@@ -81,12 +123,32 @@ class TrainingReporter:
     <div class="container">
         <h1>Model Training Run Results</h1>
         <p>Pre-training and training iteration parameters summary:</p>
+
+        <div class="cards">
+            <div class="card">
+                <div class="title">Accuracy</div>
+                <div class="value">{final_acc}</div>
+            </div>
+            <div class="card">
+                <div class="title">Precision</div>
+                <div class="value">{final_prec}</div>
+            </div>
+            <div class="card">
+                <div class="title">Recall</div>
+                <div class="value">{final_rec}</div>
+            </div>
+            <div class="card">
+                <div class="title">F1 Score</div>
+                <div class="value">{final_f1}</div>
+            </div>
+        </div>
         
         <table>
             <thead>
                 <tr>
                     <th>Epoch</th>
                     <th>Average Loss</th>
+                    {acc_header}
                     <th>Precision</th>
                     <th>Recall</th>
                     <th>F1 Score</th>
