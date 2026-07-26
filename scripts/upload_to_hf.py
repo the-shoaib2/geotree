@@ -19,6 +19,12 @@ def publish():
     print(" 🌳 GeoTree Hugging Face Model Hub Publisher")
     print("=" * 60)
 
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+    except Exception:
+        pass
+
     token = os.getenv("HF_TOKEN")
     if not token:
         token = input("Enter your Hugging Face Access Token (or set HF_TOKEN env var): ").strip()
