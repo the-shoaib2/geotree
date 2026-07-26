@@ -47,16 +47,16 @@ flowchart TD
 
 ```mermaid
 graph LR
-    Input[RGB / 4-Band Input Tile 640x640] --> Conv1[Conv 3x3 + BN + SiLU]
-    Conv1 --> ResBlock1[ConvResidualBlock 32 ch]
-    ResBlock1 --> Conv2[Conv 3x3 + Pool 160x160]
-    Conv2 --> ResBlock2[ConvResidualBlock 64 ch]
-    ResBlock2 --> Conv3[Conv 3x3 + Pool 80x80]
-    Conv3 --> AvgPool[Adaptive AvgPool]
-    AvgPool --> FC1[Linear 256 -> 128]
-    FC1 --> Head[Linear 128 -> 5 Output Logits]
-    Head --> Sigmoid[Sigmoid Activation [x, y, w, h]]
-    Sigmoid --> Loss[CIoU Loss + BCE Logits]
+    Input["RGB / 4-Band Input Tile 640x640"] --> Conv1["Conv 3x3 + BN + SiLU"]
+    Conv1 --> ResBlock1["ConvResidualBlock 32 ch"]
+    ResBlock1 --> Conv2["Conv 3x3 + Pool 160x160"]
+    Conv2 --> ResBlock2["ConvResidualBlock 64 ch"]
+    ResBlock2 --> Conv3["Conv 3x3 + Pool 80x80"]
+    Conv3 --> AvgPool["Adaptive AvgPool"]
+    AvgPool --> FC1["Linear 256 -> 128"]
+    FC1 --> Head["Linear 128 -> 5 Output Logits"]
+    Head --> Sigmoid["Sigmoid Activation (x, y, w, h)"]
+    Sigmoid --> Loss["CIoU Loss + BCE Logits"]
 ```
 
 ---
@@ -144,30 +144,29 @@ GeoTree can be used in a wide range of environmental, forestry, agricultural, an
 
 ---
 
-## 📂 Repository Structure
+## 📂 Compact Repository Structure
 
 ```text
 geotree/
-├── analytics/              # GIS Analytics Engine (Tree Count, Density, Biomass, Carbon, Health)
-├── app/                    # CDSE Sentinel-2 Downloader Module
-├── configs/                # Training & Infrastructure Configurations
-├── dataset/                # Satellite Images, YOLO/COCO Labels & Dataset README.md
-├── gis/                    # GIS Analysis Pipeline Orchestrator
-├── huggingface/            # Hugging Face Model Repository Files (`the-shoaib2/geotree`)
-│   ├── README.md           # Hugging Face Model Card with Loss Graph & Metrics
-│   ├── config.json         # Architecture Parameters
-│   ├── model.py            # Standalone Model Definition
-│   └── loss_curve.png      # Training Loss Curve Image
-├── inference/              # Inference Servers & Engines
-├── preprocessing/          # Satellite Band Extraction & Indices Calculator
-├── reports/                # Evaluation & Interactive HTML Dashboard Generator
-├── scripts/                # Automated Publisher (`upload_to_hf.py`) & Gradio Space Scripts
-├── web/                    # Full-Stack Web Application (Leaflet Map + FastAPI)
-│   ├── backend/            # Web Server (`server.py`)
-│   └── frontend/           # Interactive Bangladesh Map Dashboard (`index.html`)
-├── Dockerfile              # Production Multi-Stage Docker Build
-├── render.yaml             # Render Cloud Deployment Blueprint
-└── main.py                 # CLI Entrypoint
+├── dataset/           # Satellite Tiles, Labels & Dataset README.md
+├── huggingface/       # Hugging Face Model Card & Model Hub Weights
+│   ├── README.md      # Model Card with Metrics & Graphs
+│   ├── config.json    # Architecture Configuration
+│   ├── model.py       # PyTorch Model Definition
+│   └── *.png          # Evaluation Plots (Loss, Metrics, Predictions)
+├── inference/         # Prediction Server & ONNX Runtime Engines
+├── reports/           # HTML Dashboard Generator & Evaluation Reports
+├── scripts/           # Hugging Face Publisher & Automation Tools
+├── src/               # Core Python Modules (Analytics, App, GIS, Preprocessing, Training)
+│   ├── analytics/     # GIS Analytics Engine (Density, Biomass, Carbon, Health)
+│   ├── app/           # Sentinel-2 Downloader Module
+│   ├── gis/           # GIS Pipeline Orchestrator
+│   ├── preprocessing/ # Satellite Band & Vegetation Index Calculators
+│   └── training/      # PyTorch Model Architectures & Trainer
+├── web/               # Full-Stack Web Platform (FastAPI Backend + Leaflet Frontend)
+├── Dockerfile         # Production Containerization Build
+├── main.py            # CLI Entrypoint
+└── render.yaml        # Cloud Deployment Blueprint
 ```
 
 ---
