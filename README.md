@@ -119,19 +119,28 @@ Evaluated on official validation benchmarks (`weights/best_model.pth`):
 
 ---
 
-## 🌿 Complete Output Capabilities
+## 🌍 Applications
 
-| Output Feature | Category | Method / Source |
-|---|:---:|---|
-| 🌳 **Tree Crown Detection** | AI Model | ConvNet Object Detection |
-| 🌲 **Tree Count & Density** | Analytics | Trees per Hectare & per km² |
-| 🌿 **Forest Cover %** | Segmentation | Pixel-level Spectral Classification |
-| 💧 **Water & Land Cover** | Segmentation | 11-Class Land Cover Engine |
-| 🌱 **NDVI, NDWI, EVI** | Indices | Multispectral Band Calculation |
-| 💚 **Vegetation Health** | Health | 5-Zone Health Classifier (Score 0-100, Grades A-F) |
-| 🌍 **Biomass Estimation** | Carbon | Pantropical Broadleaf Allometric Model |
-| 💨 **Carbon Storage & CO₂** | Carbon | IPCC Carbon Fraction (0.47) × CO₂ Factor (3.67) |
-| 📈 **Forest Change** | Change | Multi-Temporal Delta NDVI Analysis |
+GeoTree can be used in a wide range of environmental, forestry, agricultural, and urban monitoring applications:
+
+- Tree detection and counting
+- Tree crown detection
+- Forest cover mapping
+- Tree density estimation
+- Deforestation monitoring
+- Reforestation tracking
+- Land cover classification
+- Vegetation health analysis (NDVI, NDWI, NDMI)
+- Carbon and biomass estimation
+- Plantation and orchard monitoring
+- Urban green space analysis
+- Water body detection
+- Grassland and bare soil detection
+- Disaster impact assessment (fire, flood, cyclone)
+- Change detection using multi-temporal satellite imagery
+- Protected forest and wildlife habitat monitoring
+- Smart city environmental planning
+- GIS-based environmental reporting and analytics
 
 ---
 

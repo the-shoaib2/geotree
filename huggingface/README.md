@@ -127,9 +127,26 @@ with torch.no_grad():
 print(f"Tree Detected: {conf > 0.3} | Confidence: {conf:.2f} | BBox: {bbox}")
 ```
 
----
-
 ## 🌍 Applications
-- **Tree Counting & Density Mapping** (trees/ha & trees/km²)
-- **Biomass & Carbon Storage Estimation** (Pantropical Allometric Equations)
-- **Forest Cover & Deforestation Monitoring**
+
+GeoTree can be used in a wide range of environmental, forestry, agricultural, and urban monitoring applications:
+
+- Tree detection and counting
+- Tree crown detection
+- Forest cover mapping
+- Tree density estimation
+- Deforestation monitoring
+- Reforestation tracking
+- Land cover classification
+- Vegetation health analysis (NDVI, NDWI, NDMI)
+- Carbon and biomass estimation
+- Plantation and orchard monitoring
+- Urban green space analysis
+- Water body detection
+- Grassland and bare soil detection
+- Disaster impact assessment (fire, flood, cyclone)
+- Change detection using multi-temporal satellite imagery
+- Protected forest and wildlife habitat monitoring
+- Smart city environmental planning
+- GIS-based environmental reporting and analytics
+
