@@ -6,7 +6,7 @@ import argparse
 from pathlib import Path
 from typing import List, Dict, Any
 
-from app.config import config
+from app.config import config, DISTRICTS, DATES
 from app.logger import logger
 from app.auth import auth_manager
 from app.search import search_sentinel_images_for_district
@@ -15,11 +15,6 @@ from app.database import db_manager
 from app.checksum import calculate_sha256
 from app.preparation import prepare_training_datasets
 from app.verifier import DatasetVerifier
-
-# List of districts
-DISTRICTS = ["bandarban", "rangamati", "sylhet", "gazipur"]
-# Required search dates
-DATES = ["2026-01-15", "2026-07-15"]
 
 def execute_pipeline() -> None:
     """Executes the dataset collection pipeline: downloads, verifies, and repeats until 100% complete."""

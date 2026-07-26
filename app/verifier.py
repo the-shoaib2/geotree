@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Dict, Any, List, Tuple
 from concurrent.futures import ThreadPoolExecutor
 
-from app.config import config
+from app.config import config, DISTRICTS, DATES
 from app.logger import logger
 from app.database import db_manager
 from app.checksum import calculate_sha256
@@ -205,8 +205,8 @@ class DatasetVerifier:
             "global_forest_change": {"expected": 1, "downloaded": 0, "verified": 0, "missing": 0}
         }
         
-        # Sentinel-2 expected tiles is 8
-        dataset_stats["sentinel2"]["expected"] = 8
+        # Sentinel-2 expected tiles is dynamically calculated based on config targets
+        dataset_stats["sentinel2"]["expected"] = len(DISTRICTS) * len(DATES)
         
         report_rows = []
         

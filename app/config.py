@@ -6,6 +6,11 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+# Active districts and search dates for the pipeline execution
+DISTRICTS = ["bandarban", "rangamati", "sylhet", "gazipur", "sundarbans", "coxs_bazar"]
+DATES = ["2026-01-15", "2026-04-15", "2026-07-15", "2026-10-15"]
+
+
 class Config:
     def __init__(self, config_path: str = "config.yaml"):
         self.config_path = Path(config_path)
