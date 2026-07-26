@@ -3,10 +3,10 @@ from pathlib import Path
 
 class TrainConfig:
     def __init__(self):
-        self.epochs = 20
+        self.epochs = 40
         self.img_size = 640
         self.weight_decay = 0.0001
-        self.lr = 0.0005
+        self.lr = 0.001
         self.iou_threshold = 0.5
         self.batch_size = self._auto_select_batch_size()
         self.device = self._auto_detect_device()

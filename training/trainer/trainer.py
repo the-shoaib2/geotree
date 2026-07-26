@@ -126,7 +126,7 @@ class ModelTrainer:
                     cls_loss = self.cls_criterion(conf_logits, target_conf)
                     bbox_loss = self._compute_ciou_loss(outputs[:, 1:].contiguous(), targets[:, 1:].contiguous())
                     
-                    loss = cls_loss + 2.0 * bbox_loss
+                    loss = cls_loss + 10.0 * bbox_loss
                     loss.backward()
                     
                     torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
