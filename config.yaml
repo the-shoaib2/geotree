@@ -1,0 +1,13 @@
+download_directory: "dataset"
+max_parallel_downloads: 1
+cloud_cover: 10
+start_date: "2026-01-01"
+end_date: "2026-07-31"
+collection: "sentinel-2-l2a"
+processing_level: "LEVEL2A"
+
+# Additional datasets URLs
+deepforest_sample_url: "https://raw.githubusercontent.com/weecology/DeepForest/main/src/deepforest/data/OSBS_029.png"
+deepforest_zenodo_url: "https://zenodo.org/api/records/4043694/files/000329000192008.pdf/content"
+selvabox_url: "https://huggingface.co/datasets/CanopyRS/SelvaBox/raw/main/README.md"
+global_forest_change_url: "https://storage.googleapis.com/earthenginepartners-hansen/GFC-2023-v1.11/Hansen_GFC-2023-v1.11_treecover2000_30N_090E.tif"

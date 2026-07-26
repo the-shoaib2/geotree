@@ -1,0 +1,28 @@
+# Datasets
+dataset/
+tree_dataset/
+
+# Database
+database/*.db
+database/*.sqlite
+
+# Configuration & Secrets
+.env
+
+# Logs
+logs/
+*.log
+
+# Python cache & virtual environment
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+ENV/
+
+# OS files
+.DS_Store
+Thumbs.db
