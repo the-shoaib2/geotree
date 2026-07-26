@@ -11,3 +11,15 @@ deepforest_sample_url: "https://raw.githubusercontent.com/weecology/DeepForest/m
 deepforest_zenodo_url: "https://zenodo.org/api/records/4043694/files/000329000192008.pdf/content"
 selvabox_url: "https://huggingface.co/datasets/CanopyRS/SelvaBox/raw/main/README.md"
 global_forest_change_url: "https://storage.googleapis.com/earthenginepartners-hansen/GFC-2023-v1.11/Hansen_GFC-2023-v1.11_treecover2000_30N_090E.tif"
+# Preprocessing configuration
+tile_size: 512
+overlap: 64
+cloud_threshold: 20
+output_format: "PNG"
+train_ratio: 0.8
+validation_ratio: 0.1
+test_ratio: 0.1
+crs: "EPSG:4326"
+augmentation: true
+batch_size: 16
+workers: 4

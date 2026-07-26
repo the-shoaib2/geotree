@@ -179,6 +179,12 @@ def run_cli() -> None:
     # Standalone verification command
     subparsers.add_parser("verify", help="Scan folders, verify checksums, and generate reports")
     
+    # Standalone preprocessing command
+    subparsers.add_parser("preprocess", help="Run the geospatial preprocessing pipeline")
+    
+    # Model training and export command
+    subparsers.add_parser("train", help="Run model training and export pipeline")
+    
     # List command
     subparsers.add_parser("list", help="List database products and download status")
 
@@ -202,6 +208,37 @@ def run_cli() -> None:
             verifier.verify_all()
         except Exception as e:
             logger.critical(f"Standalone verification failed: {e}", exc_info=True)
+            sys.exit(1)
+
+    elif args.command == "preprocess":
+        try:
+            from preprocessing.pipeline.pipeline import PreprocessingPipeline
+            pipeline = PreprocessingPipeline()
+            pipeline.run()
+        except Exception as e:
+            logger.critical(f"Preprocessing execution failed: {e}", exc_info=True)
+            sys.exit(1)
+
+    elif args.command == "train":
+        try:
+            from training.trainer.trainer import ModelTrainer
+            from training.models.exporter import ModelExporter
+            
+            # 1. Train model
+            trainer = ModelTrainer()
+            trainer.train()
+            
+            # 2. Export to ONNX
+            exporter = ModelExporter()
+            onnx_path = Path("exports/best_model.onnx")
+            exporter.export_to_onnx(trainer.model, onnx_path)
+            
+            # 3. Export to TorchScript
+            ts_path = Path("exports/best_model.pt")
+            exporter.export_to_torchscript(trainer.model, ts_path)
+            
+        except Exception as e:
+            logger.critical(f"Model training or export failed: {e}", exc_info=True)
             sys.exit(1)
 
     elif args.command == "list":

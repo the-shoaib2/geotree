@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Model Training Metrics Report</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            padding: 40px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #161b22;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #30363d;
+        }
+        h1 {
+            color: #58a6ff;
+            border-bottom: 2px solid #21262d;
+            padding-bottom: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #21262d;
+        }
+        th {
+            background-color: #21262d;
+            color: #2ea44f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Model Training Run Results</h1>
+        <p>Pre-training and training iteration parameters summary:</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Epoch</th>
+                    <th>Average Loss</th>
+                    <th>Precision</th>
+                    <th>Recall</th>
+                    <th>F1 Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            <tr>
+                <td>1</td>
+                <td>0.0007</td>
+                <td>80.00%</td>
+                <td>75.00%</td>
+                <td>77.00%</td>
+            </tr>
+            
+            <tr>
+                <td>2</td>
+                <td>0.0001</td>
+                <td>82.00%</td>
+                <td>77.00%</td>
+                <td>79.00%</td>
+            </tr>
+            
+            <tr>
+                <td>3</td>
+                <td>0.0001</td>
+                <td>84.00%</td>
+                <td>79.00%</td>
+                <td>81.00%</td>
+            </tr>
+            
+            <tr>
+                <td>4</td>
+                <td>0.0001</td>
+                <td>86.00%</td>
+                <td>81.00%</td>
+                <td>83.00%</td>
+            </tr>
+            
+            <tr>
+                <td>5</td>
+                <td>0.0000</td>
+                <td>88.00%</td>
+                <td>83.00%</td>
+                <td>85.00%</td>
+            </tr>
+            
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
