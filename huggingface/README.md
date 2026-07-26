@@ -54,7 +54,7 @@ from huggingface_hub import hf_hub_download
 from model import TreeDetectorModel
 
 # 1. Download model weights from Hugging Face
-weights_path = hf_hub_download(repo_id="your-username/geotree", filename="pytorch_model.bin")
+weights_path = hf_hub_download(repo_id="the-shoaib2/geotree", filename="pytorch_model.bin")
 
 # 2. Instantiate and load model
 model = TreeDetectorModel()
