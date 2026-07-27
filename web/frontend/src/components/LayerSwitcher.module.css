@@ -1,0 +1,21 @@
+.switcher {
+  position: absolute; bottom: 24px; left: 16px; z-index: 1500;
+  display: flex; gap: 4px;
+  background: #ffffff;
+  border: none; border-radius: 9999px;
+  padding: 4px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.btn {
+  background: transparent; color: var(--text-muted);
+  border: none; padding: 6px 14px;
+  border-radius: 9999px; font-size: 11px; font-weight: 600;
+  cursor: pointer; transition: all var(--transition-fast);
+  display: flex; align-items: center; gap: 5px;
+}
+
+.btn i { font-size: 11px; }
+
+.btn:hover { background: #f1f5f9; color: var(--text-primary); }
+
+.btn.active { background: #0f172a; color: #ffffff; }

@@ -1,0 +1,90 @@
+/* ═══════════════════════════════════════════════════
+   GeoTree — Shadcn Default White Theme (No Borders, Rounded-Full)
+   ═══════════════════════════════════════════════════ */
+
+:root {
+  --bg-body: #f8fafc;
+  --bg-header: #ffffff;
+  --bg-panel: #ffffff;
+  --bg-card: #f8fafc;
+  --bg-card-hover: #f1f5f9;
+  --card-border: transparent;
+  --card-border-hover: transparent;
+
+  --accent-green: #16a34a;
+  --accent-green-bright: #15803d;
+  --accent-blue: #0284c7;
+  --accent-yellow: #d97706;
+  --accent-red: #dc2626;
+  --accent-cyan: #0891b2;
+
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
+  --shadow-panel: -4px 0 25px rgba(0, 0, 0, 0.05);
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg-body);
+  color: var(--text-secondary);
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.2); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(100, 116, 139, 0.35); }
+
+/* ─── Leaflet Overrides (Light Clean Card, No Border) ─── */
+.leaflet-popup-content-wrapper {
+  background: #ffffff !important;
+  color: var(--text-primary) !important;
+  border: none !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+  font-family: 'Inter', sans-serif !important;
+}
+.leaflet-popup-tip { background: #ffffff !important; }
+.leaflet-popup-content { margin: 10px 14px !important; font-size: 12px !important; }
+.leaflet-draw-toolbar { display: none !important; }
+.leaflet-draw-actions { display: none !important; }
+
+/* ─── Animations ─── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4); }
+  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(22, 163, 74, 0); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes countPulse {
+  0% { transform: scale(0.85); opacity: 0.5; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes analyzeGlow {
+  0%, 100% { box-shadow: 0 2px 12px rgba(2, 132, 199, 0.2); }
+  50% { box-shadow: 0 4px 24px rgba(2, 132, 199, 0.4); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

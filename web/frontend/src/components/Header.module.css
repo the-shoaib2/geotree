@@ -1,0 +1,90 @@
+.header {
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  right: 20px;
+  height: 56px;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  z-index: 2000;
+  pointer-events: none;
+}
+
+.left, .right {
+  display: flex;
+  align-items: center;
+  pointer-events: auto;
+}
+
+/* Logo Pill (Glassmorphic Transparent) */
+.left {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 6px 16px 6px 6px;
+  border-radius: 9999px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.logoIcon {
+  width: 34px; height: 34px; border-radius: 9999px;
+  background: #16a34a;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; color: #ffffff;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.2);
+}
+
+.logoText { display: flex; flex-direction: column; line-height: 1; margin-left: 10px; }
+.title {
+  font-size: 17px; font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.4px;
+}
+
+.badge {
+  display: flex; align-items: center; gap: 6px; margin-left: 10px;
+  background: #f0fdf4; color: #16a34a;
+  border: none;
+  padding: 4px 12px; border-radius: 9999px;
+  font-size: 11px; font-weight: 600;
+}
+
+.pulseDot {
+  width: 6px; height: 6px; border-radius: 9999px;
+  background: #16a34a; animation: pulse 2s infinite;
+}
+
+/* Analyze Button (Shadcn Default Button, Rounded Full) */
+.analyzeBtn {
+  background: #0f172a;
+  color: #ffffff; border: none;
+  padding: 10px 24px; border-radius: 9999px;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  display: flex; align-items: center; gap: 8px;
+  transition: all var(--transition-normal);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.2);
+}
+
+.analyzeBtn:hover {
+  background: #1e293b;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.3);
+}
+
+.analyzeBtn:active { transform: translateY(0); }
+
+.analyzeBtn.analyzing {
+  background: #0284c7;
+  animation: analyzeGlow 1.5s ease infinite;
+}
+
+.analyzeBtn:disabled { cursor: not-allowed; opacity: 0.85; }
+
+@media (max-width: 600px) { .badge { display: none; } }

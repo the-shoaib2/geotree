@@ -1,0 +1,50 @@
+.container { flex: 1; position: relative; height: 100%; }
+.map { width: 100%; height: 100%; background: #070b14; z-index: 1; }
+
+/* Floating Map Control Toolbar (Right Side, Solid White Pill, No Borders) */
+.toolbar {
+  position: absolute; top: 86px; right: 20px; z-index: 1500;
+  display: flex; flex-direction: column; gap: 6px;
+  background: #ffffff;
+  border: none; border-radius: 9999px;
+  padding: 6px; box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+}
+
+.toolBtn {
+  width: 38px; height: 38px; border: none;
+  border-radius: 9999px; background: transparent;
+  color: #475569; font-size: 14px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.toolBtn:hover { background: #f1f5f9; color: #0f172a; }
+
+.toolBtn.active { background: #0f172a; color: #ffffff; box-shadow: 0 4px 12px rgba(15, 23, 42, 0.25); }
+
+.divider { height: 1px; background: #e2e8f0; margin: 3px 6px; }
+
+/* Enable/Disable Labels Toggle (Bottom Right, Solid White Pill, No Border) */
+.labelToggleContainer {
+  position: absolute; bottom: 24px; right: 20px; left: auto; z-index: 1500;
+}
+
+.labelToggleBtn {
+  background: #ffffff;
+  color: #475569;
+  border: none; padding: 8px 18px;
+  border-radius: 9999px; font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+}
+
+.labelToggleBtn i { font-size: 13px; color: #64748b; }
+
+.labelToggleBtn:hover { background: #f8fafc; color: #0f172a; }
+
+.labelToggleBtn.active {
+  background: #0f172a; color: #ffffff;
+}
+
+.labelToggleBtn.active i { color: #38bdf8; }
