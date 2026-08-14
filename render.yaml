@@ -1,14 +1,41 @@
 # Render Infrastructure Blueprint Configuration
+# Reference: https://render.com/docs/blueprint-spec
+version: "1"
+
 services:
+  # 🌲 GeoTree Production Web Service (FastAPI Backend + React GIS Frontend)
   - type: web
     name: geotree-platform
+    runtime: docker
     env: docker
     plan: free
     region: singapore
     dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/regions
+    autoDeploy: true
     envVars:
       - key: PORT
-        value: 8000
+        value: "8000"
       - key: PYTHONUNBUFFERED
         value: "1"
-    autoDeploy: true
+      - key: PYTHONPATH
+        value: "/app"
+      - key: ENVIRONMENT
+        value: "production"
+
+  # Optional Decoupled Static Site (if hosting React frontend standalone on Render)
+  # - type: web
+  #   name: geotree-frontend
+  #   runtime: static
+  #   env: static
+  #   buildCommand: pnpm install && pnpm run build
+  #   staticPublishPath: ./web/frontend/dist
+  #   rootDir: web/frontend
+  #   envVars:
+  #     - key: VITE_API_BASE_URL
+  #       fromService:
+  #         type: web
+  #         name: geotree-platform
+  #         property: host
+
