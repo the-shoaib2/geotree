@@ -5,7 +5,7 @@ version: "1"
 services:
   # 🌲 GeoTree Production Web Service (FastAPI Backend + React GIS Frontend)
   - type: web
-    name: geotree-platform
+    name: geotree
     runtime: docker
     env: docker
     plan: free
