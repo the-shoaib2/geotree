@@ -1,11 +1,52 @@
 import { useEffect, useRef, useState, useCallback } from "react";
-import { MapContainer, TileLayer, Rectangle, Polygon, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Rectangle, Polygon, Marker, Popup, useMap, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-draw/dist/leaflet.draw.css";
 import "leaflet-draw";
-import { SATELLITE_LAYER, LABELS_LAYER, BANGLADESH_BOUNDS, BANGLADESH_POLYGON, WORLD_OUTER_BOUNDS } from "../data/constants";
+import { SATELLITE_LAYER, LABELS_LAYER, BANGLADESH_BOUNDS, BANGLADESH_POLYGON, WORLD_OUTER_BOUNDS, REGIONS } from "../data/constants";
 import styles from "./MapView.module.css";
+
+/* ─── Custom Animated Map Selection Pin Marker Icon ─── */
+const selectionPinIcon = L.divIcon({
+  className: "custom-pin-marker-container",
+  html: `
+    <div class="pin-pulse-ring"></div>
+    <div class="pin-icon-body">
+      <i class="fa-solid fa-location-dot"></i>
+    </div>
+  `,
+  iconSize: [40, 40],
+  iconAnchor: [20, 36],
+  popupAnchor: [0, -36],
+});
+
+/* ─── Custom Preset Region Pin Marker Icon ─── */
+const createRegionPinIcon = (name, icon) =>
+  L.divIcon({
+    className: "region-pin-marker-container",
+    html: `
+      <div class="region-pin-body">
+        <i class="fa-solid ${icon || 'fa-tree'}"></i>
+        <span>${name}</span>
+      </div>
+    `,
+    iconSize: [120, 30],
+    iconAnchor: [60, 15],
+    popupAnchor: [0, -15],
+  });
+
+/* ─── Map Click Listener Handler ─── */
+function MapClickHandler({ onPointSelect, enabled }) {
+  useMapEvents({
+    click(e) {
+      if (enabled) {
+        onPointSelect(e.latlng.lat, e.latlng.lng);
+      }
+    },
+  });
+  return null;
+}
 
 /* ─── Fly-to helper with smooth ease ─── */
 function FlyTo({ center, zoom }) {
@@ -13,7 +54,7 @@ function FlyTo({ center, zoom }) {
   useEffect(() => {
     if (center) {
       map.flyTo(center, zoom, {
-        duration: 2.0,
+        duration: 1.8,
         easeLinearity: 0.25,
         animate: true,
       });
@@ -37,7 +78,6 @@ function DrawController({ activeDrawType, onCreated, onDrawEnd }) {
   const drawnRef = useRef(new L.FeatureGroup());
   const activeHandlerRef = useRef(null);
 
-  // Setup drawn items group & event listener
   useEffect(() => {
     const drawnItems = drawnRef.current;
     map.addLayer(drawnItems);
@@ -45,7 +85,7 @@ function DrawController({ activeDrawType, onCreated, onDrawEnd }) {
     const handler = (e) => {
       drawnItems.clearLayers();
       drawnItems.addLayer(e.layer);
-      e.layer.setStyle({ color: "#0284c7", weight: 2, dashArray: "6,4", fillColor: "#0284c7", fillOpacity: 0.08 });
+      e.layer.setStyle({ color: "#10b981", weight: 2.5, dashArray: "6,4", fillColor: "#10b981", fillOpacity: 0.12 });
       const b = e.layer.getBounds();
       onCreated?.(b.getSouth(), b.getWest(), b.getNorth(), b.getEast());
       onDrawEnd?.();
@@ -59,7 +99,6 @@ function DrawController({ activeDrawType, onCreated, onDrawEnd }) {
     };
   }, [map, onCreated, onDrawEnd]);
 
-  // Handle trigger of single rectangle area selection tool
   useEffect(() => {
     if (activeHandlerRef.current) {
       activeHandlerRef.current.disable();
@@ -68,7 +107,7 @@ function DrawController({ activeDrawType, onCreated, onDrawEnd }) {
 
     if (activeDrawType === "rectangle") {
       activeHandlerRef.current = new L.Draw.Rectangle(map, {
-        shapeOptions: { color: "#0284c7", weight: 2, fillColor: "#0284c7", fillOpacity: 0.08 },
+        shapeOptions: { color: "#10b981", weight: 2.5, fillColor: "#10b981", fillOpacity: 0.12 },
       });
       activeHandlerRef.current.enable();
     }
@@ -82,18 +121,30 @@ export default function MapView({
   showLabels,
   onToggleLabels,
   bbox,
+  selectedPin,
+  onPointSelect,
+  onRegionSelect,
   onDrawCreated,
   onClearDraw,
+  analysisData,
 }) {
   const [mapInstance, setMapInstance] = useState(null);
   const [activeDrawType, setActiveDrawType] = useState(null);
+  const [pinToolActive, setPinToolActive] = useState(true);
 
   const handleStartDraw = () => {
     setActiveDrawType((prev) => (prev ? null : "rectangle"));
+    if (!activeDrawType) setPinToolActive(false);
+  };
+
+  const handleTogglePinTool = () => {
+    setPinToolActive((prev) => !prev);
+    if (!pinToolActive) setActiveDrawType(null);
   };
 
   const handleDrawEnd = useCallback(() => {
     setActiveDrawType(null);
+    setPinToolActive(true);
   }, []);
 
   const handleClear = () => {
@@ -110,7 +161,7 @@ export default function MapView({
   };
 
   const handleFitLocation = () => {
-    mapInstance?.flyTo([23.685, 90.356], 7, {
+    mapInstance?.flyTo([23.685, 90.356], 7.25, {
       duration: 1.8,
       easeLinearity: 0.25,
     });
@@ -120,7 +171,7 @@ export default function MapView({
     <div className={styles.container}>
       <MapContainer
         center={[23.685, 90.356]}
-        zoom={7}
+        zoom={7.25}
         minZoom={6.5}
         maxZoom={18}
         zoomSnap={0.25}
@@ -139,7 +190,10 @@ export default function MapView({
       >
         <MapRefBinder onMapReady={setMapInstance} />
 
-        {/* Satellite Base Layer with High-Performance Tile Buffering */}
+        {/* Map Click Listener for Selection Pin Drop */}
+        <MapClickHandler onPointSelect={onPointSelect} enabled={pinToolActive && !activeDrawType} />
+
+        {/* Satellite Base Layer */}
         <TileLayer
           url={SATELLITE_LAYER.url}
           attribution={SATELLITE_LAYER.attribution}
@@ -149,18 +203,18 @@ export default function MapView({
           updateWhenIdle={true}
         />
 
-        {/* Solid Dark Mask for 100% hiding all non-Bangladesh regions */}
+        {/* Outer World Dark Mask for 100% Bangladesh Boundary Focus */}
         <Polygon
           positions={[WORLD_OUTER_BOUNDS, BANGLADESH_POLYGON]}
           pathOptions={{
-            fillColor: "#070b14",
-            fillOpacity: 1.0,
-            color: "#16a34a",
-            weight: 2.5,
+            fillColor: "#030712",
+            fillOpacity: 0.96,
+            color: "#10b981",
+            weight: 2.2,
           }}
         />
 
-        {/* Satellite Reference Labels Overlay (Only inside Bangladesh) */}
+        {/* Satellite Reference Labels */}
         {showLabels && (
           <TileLayer
             url={LABELS_LAYER.url}
@@ -177,30 +231,84 @@ export default function MapView({
           onDrawEnd={handleDrawEnd}
         />
 
-        {/* Region bounding box */}
+        {/* Preset Bangladesh Region Pin Markers */}
+        {Object.entries(REGIONS).map(([key, reg]) => (
+          <Marker
+            key={key}
+            position={reg.center}
+            icon={createRegionPinIcon(reg.name.split(" ")[0], reg.icon)}
+            eventHandlers={{
+              click: () => onRegionSelect?.(key),
+            }}
+          />
+        ))}
+
+        {/* Active Selection Pin Marker with Glassmorphic Popup */}
+        {selectedPin && (
+          <Marker position={[selectedPin.lat, selectedPin.lng]} icon={selectionPinIcon}>
+            <Popup autoPan={true} closeButton={true}>
+              <div className={styles.popupContainer}>
+                <div className={styles.popupTitle}>
+                  <i className="fa-solid fa-location-dot" style={{ color: "#10b981" }} />
+                  <span>{selectedPin.name || "Selected Map Location"}</span>
+                </div>
+                <div className={styles.popupCoords}>
+                  Lat: {selectedPin.lat.toFixed(4)}° • Lng: {selectedPin.lng.toFixed(4)}°
+                </div>
+                {analysisData && (
+                  <div className={styles.popupStats}>
+                    <div className={styles.popupStatItem}>
+                      <span className={styles.popupStatVal}>{analysisData.tree_summary.total_trees.toLocaleString()}</span>
+                      <span className={styles.popupStatLbl}>Trees</span>
+                    </div>
+                    <div className={styles.popupStatItem}>
+                      <span className={styles.popupStatVal}>{analysisData.area.hectares}</span>
+                      <span className={styles.popupStatLbl}>Hectares</span>
+                    </div>
+                    <div className={styles.popupStatItem}>
+                      <span className={styles.popupStatVal}>{analysisData.vegetation_health.score}</span>
+                      <span className={styles.popupStatLbl}>Health</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </Popup>
+          </Marker>
+        )}
+
+        {/* Region Bounding Box Outline */}
         {bbox && (
           <Rectangle
             bounds={[[bbox.south, bbox.west], [bbox.north, bbox.east]]}
-            pathOptions={{ color: "#0284c7", weight: 2, dashArray: "6,4", fillColor: "#0284c7", fillOpacity: 0.06 }}
+            pathOptions={{ color: "#10b981", weight: 2.5, dashArray: "6,4", fillColor: "#10b981", fillOpacity: 0.12 }}
           />
         )}
       </MapContainer>
 
-      {/* Floating Right-Side Map Control Toolbar (Single Draw Button, Zoom +, Zoom -, Fit Location, Clear) */}
+      {/* Floating Right-Side Glassmorphic Control Toolbar */}
       <div className={styles.toolbar}>
-        {/* Single Unified Area Selection Button */}
+        {/* Drop Selection Pin Mode */}
+        <button
+          className={`${styles.toolBtn} ${pinToolActive && !activeDrawType ? styles.active : ""}`}
+          title="Click Map to Drop Selection Pin"
+          onClick={handleTogglePinTool}
+        >
+          <i className="fa-solid fa-location-dot" />
+        </button>
+
+        {/* Rectangle Area Selection Mode */}
         <button
           className={`${styles.toolBtn} ${activeDrawType ? styles.active : ""}`}
-          title="Select Area on Map"
+          title="Draw Area Rectangle on Map"
           onClick={handleStartDraw}
         >
           <i className="fa-solid fa-crop-simple" />
         </button>
 
-        {/* Clear Selection */}
-        {bbox && (
-          <button className={styles.toolBtn} title="Clear Selection" onClick={handleClear}>
-            <i className="fa-solid fa-eraser" />
+        {/* Clear Active Selection */}
+        {(bbox || selectedPin) && (
+          <button className={styles.toolBtn} title="Clear Pin & Area Selection" onClick={handleClear}>
+            <i className="fa-solid fa-trash-can" />
           </button>
         )}
 
@@ -216,20 +324,20 @@ export default function MapView({
           <i className="fa-solid fa-minus" />
         </button>
 
-        {/* Fit Location / Reset View to Bangladesh */}
-        <button className={styles.toolBtn} title="Fit Bangladesh View" onClick={handleFitLocation}>
+        {/* Reset View to Bangladesh Center */}
+        <button className={styles.toolBtn} title="Reset View to Bangladesh" onClick={handleFitLocation}>
           <i className="fa-solid fa-crosshairs" />
         </button>
       </div>
 
-      {/* Enable/Disable Labels Toggle (Shadcn Rounded Full) */}
+      {/* Glassmorphic Map Labels Toggle */}
       <div className={styles.labelToggleContainer}>
         <button
           className={`${styles.labelToggleBtn} ${showLabels ? styles.active : ""}`}
           onClick={onToggleLabels}
         >
           <i className={`fa-solid ${showLabels ? "fa-eye" : "fa-eye-slash"}`} />
-          <span>{showLabels ? "Labels Enabled" : "Labels Disabled"}</span>
+          <span>{showLabels ? "Labels On" : "Labels Off"}</span>
         </button>
       </div>
     </div>

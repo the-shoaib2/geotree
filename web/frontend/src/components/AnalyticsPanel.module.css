@@ -1,4 +1,4 @@
-/* ─── Floating Overlay Modal Widget (On Top of Map) ─── */
+/* ─── Floating Glassmorphic Overlay Panel ─── */
 .panel {
   position: absolute;
   top: 84px;
@@ -14,28 +14,50 @@
   pointer-events: none;
 }
 
-/* Header Solid Card */
+/* Header Glass Card */
 .panelHeader {
-  padding: 14px 20px;
+  padding: 14px 18px;
   margin-bottom: 12px;
-  background: #ffffff;
-  border: none;
-  border-radius: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: var(--glass-blur-heavy);
+  -webkit-backdrop-filter: var(--glass-blur-heavy);
+  border: var(--border-glass);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-glass);
   pointer-events: auto;
 }
 
-.headerRow { display: flex; align-items: center; gap: 12px; }
-
-.headerIcon {
-  width: 34px; height: 34px; border-radius: 9999px;
-  background: rgba(15, 23, 42, 0.06); display: flex;
-  align-items: center; justify-content: center;
-  color: var(--text-primary); font-size: 14px; flex-shrink: 0;
+.headerRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.panelTitle { font-size: 15px; font-weight: 800; color: var(--text-primary); letter-spacing: -0.3px; }
-.panelSub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.headerIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  flex-shrink: 0;
+}
+
+.panelTitle {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+}
+
+.panelSub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
 
 /* Body Container */
 .body {
@@ -48,100 +70,231 @@
   pointer-events: auto;
 }
 
-/* Section Labels (High-Contrast Drop Shadow over Satellite Imagery) */
 .sectionLabel {
   font-size: 11px;
   font-weight: 800;
-  color: #ffffff;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-  text-transform: none;
-  letter-spacing: 0.2px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
   margin-bottom: -4px;
 }
 
-/* Metric Cards (Solid White, No Hover Transform, No Borders) */
-.metricsGrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-
-.metricCard {
-  background: #ffffff;
-  border: none;
-  border-radius: 18px;
-  padding: 12px;
-  text-align: center;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+/* Metric Cards Grid */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
 }
 
-.metricIcon { font-size: 15px; margin-bottom: 3px; }
-.metricLbl { font-size: 10px; color: var(--text-muted); text-transform: none; font-weight: 600; }
-.metricVal { font-size: 19px; font-weight: 800; color: var(--text-primary); margin-top: 2px; line-height: 1.1; }
+.metricCard {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--border-glass-light);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: all var(--transition-normal);
+}
 
-/* Health Box (Solid White Card) */
+.metricCard:hover {
+  background: rgba(30, 41, 59, 0.85);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.metricIcon {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.metricLbl {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.metricVal {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-top: 2px;
+  line-height: 1.1;
+}
+
+/* Vegetation Health Card */
 .healthBox {
   display: flex;
   align-items: center;
   gap: 14px;
-  background: #ffffff;
-  border: none;
-  border-radius: 20px;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--border-glass-light);
+  border-radius: var(--radius-md);
   padding: 14px 18px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
-.healthRing { position: relative; width: 66px; height: 66px; flex-shrink: 0; }
-.healthRing svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-.ringBg { fill: none; stroke: rgba(226, 232, 240, 0.8); stroke-width: 8; }
-.ringFill { fill: none; stroke-width: 8; stroke-linecap: round; transition: stroke-dasharray 1s cubic-bezier(0.4, 0, 0.2, 1); }
-.healthScore { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 18px; font-weight: 800; color: var(--text-primary); }
-.healthInfo { flex: 1; }
-.gradeText { font-size: 13px; font-weight: 700; color: var(--text-primary); text-transform: none; }
-.ndviText { font-size: 11px; color: var(--text-muted); margin-top: 2px; text-transform: none; }
-.healthBarTrack { height: 6px; background: rgba(226, 232, 240, 0.8); border-radius: 9999px; overflow: hidden; margin-top: 6px; }
-.healthBarFill { height: 100%; border-radius: 9999px; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
+.healthRing {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+}
 
-/* Land Cover & Biomass Cards (Solid White Cards) */
+.healthRing svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ringBg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 8;
+}
+
+.ringFill {
+  fill: none;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dasharray 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.healthScore {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.healthInfo {
+  flex: 1;
+}
+
+.gradeText {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.ndviText {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.healthBarTrack {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.healthBarFill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Cards */
 .card {
-  background: #ffffff;
-  border: none;
-  border-radius: 20px;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--border-glass-light);
+  border-radius: var(--radius-md);
   padding: 14px 18px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
-.distItem { display: flex; flex-direction: column; gap: 4px; }
+.distItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 
 .distHeader {
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 11px; font-weight: 600; color: var(--text-secondary); text-transform: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
 }
 
-.dot { display: inline-block; width: 7px; height: 7px; border-radius: 9999px; margin-right: 6px; }
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  margin-right: 6px;
+}
 
 .pctBadge {
-  background: #f1f5f9; color: var(--text-muted);
-  padding: 2px 8px; border-radius: 9999px;
-  font-size: 10px; font-weight: 700; text-transform: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 700;
 }
 
-.barBg { height: 6px; background: rgba(226, 232, 240, 0.8); border-radius: 9999px; overflow: hidden; }
-.barFill { height: 100%; border-radius: 9999px; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.barBg {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  overflow: hidden;
+}
 
-/* Biomass Rows */
-.bioRow { display: flex; justify-content: space-between; align-items: center; font-size: 12px; text-transform: none; }
-.bioLabel { color: var(--text-muted); font-weight: 500; text-transform: none; }
-.bioVal { font-weight: 700; color: var(--text-primary); text-transform: none; }
+.barFill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-/* Coords Badge (Solid White Pill) */
+.bioRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+.bioLabel {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.bioVal {
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Coords Badge */
 .coordsCard {
-  background: #ffffff;
-  border: none;
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--border-glass-emerald);
   border-radius: 9999px;
   padding: 8px 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-  display: flex; align-items: center; justify-content: center; gap: 6px;
-  font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: none;
+  box-shadow: var(--shadow-glass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 @media (max-width: 900px) {
@@ -150,7 +303,6 @@
 
 @media (max-width: 700px) {
   .panel {
-    position: absolute;
     left: 12px;
     right: 12px;
     top: 80px;

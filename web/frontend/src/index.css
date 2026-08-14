@@ -1,35 +1,42 @@
-/* ═══════════════════════════════════════════════════
-   GeoTree — Shadcn Default White Theme (No Borders, Rounded-Full)
-   ═══════════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════════
+   GeoTree — Premium Dark Glassmorphism Design System ("Backdoor Blurry")
+   ═══════════════════════════════════════════════════════════════════ */
 
 :root {
-  --bg-body: #f8fafc;
-  --bg-header: #ffffff;
-  --bg-panel: #ffffff;
-  --bg-card: #f8fafc;
-  --bg-card-hover: #f1f5f9;
-  --card-border: transparent;
-  --card-border-hover: transparent;
+  --bg-dark-base: #070b14;
+  --bg-glass: rgba(15, 23, 42, 0.76);
+  --bg-glass-card: rgba(30, 41, 59, 0.68);
+  --bg-glass-hover: rgba(51, 65, 85, 0.8);
+  
+  --border-glass: 1px solid rgba(255, 255, 255, 0.12);
+  --border-glass-light: 1px solid rgba(255, 255, 255, 0.08);
+  --border-glass-emerald: 1px solid rgba(16, 185, 129, 0.35);
+  --border-glass-cyan: 1px solid rgba(6, 182, 212, 0.35);
 
-  --accent-green: #16a34a;
-  --accent-green-bright: #15803d;
-  --accent-blue: #0284c7;
-  --accent-yellow: #d97706;
-  --accent-red: #dc2626;
-  --accent-cyan: #0891b2;
+  --glass-blur: blur(16px);
+  --glass-blur-heavy: blur(24px);
+  --glass-blur-sm: blur(10px);
 
-  --text-primary: #0f172a;
-  --text-secondary: #334155;
-  --text-muted: #64748b;
+  --accent-emerald: #10b981;
+  --accent-emerald-bright: #34d399;
+  --accent-cyan: #06b6d4;
+  --accent-blue: #38bdf8;
+  --accent-amber: #f59e0b;
+  --accent-rose: #f43f5e;
 
-  --radius-sm: 8px;
-  --radius-md: 16px;
-  --radius-lg: 24px;
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  --radius-sm: 10px;
+  --radius-md: 18px;
+  --radius-lg: 26px;
   --radius-full: 9999px;
 
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04);
-  --shadow-panel: -4px 0 25px rgba(0, 0, 0, 0.05);
+  --shadow-glass: 0 12px 40px rgba(0, 0, 0, 0.45);
+  --shadow-glow-emerald: 0 0 25px rgba(16, 185, 129, 0.25);
+  --shadow-glow-cyan: 0 0 25px rgba(6, 182, 212, 0.25);
+  
   --transition-fast: 0.15s ease;
   --transition-normal: 0.25s ease;
   --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -43,47 +50,143 @@
 
 html, body, #root {
   height: 100%;
+  width: 100%;
   overflow: hidden;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background: var(--bg-body);
+  background: var(--bg-dark-base);
   color: var(--text-secondary);
   -webkit-font-smoothing: antialiased;
 }
 
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(100, 116, 139, 0.2); border-radius: 9999px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(100, 116, 139, 0.35); }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.18); border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(16, 185, 129, 0.4); }
 
-/* ─── Leaflet Overrides (Light Clean Card, No Border) ─── */
+/* ─── Leaflet Overrides (Dark Frosted Glass Popup & Clean Controls) ─── */
 .leaflet-popup-content-wrapper {
-  background: #ffffff !important;
+  background: rgba(15, 23, 42, 0.88) !important;
+  backdrop-filter: var(--glass-blur-heavy) !important;
+  -webkit-backdrop-filter: var(--glass-blur-heavy) !important;
   color: var(--text-primary) !important;
-  border: none !important;
+  border: var(--border-glass-emerald) !important;
   border-radius: var(--radius-md) !important;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), 0 0 20px rgba(16, 185, 129, 0.2) !important;
   font-family: 'Inter', sans-serif !important;
+  padding: 4px !important;
 }
-.leaflet-popup-tip { background: #ffffff !important; }
-.leaflet-popup-content { margin: 10px 14px !important; font-size: 12px !important; }
-.leaflet-draw-toolbar { display: none !important; }
-.leaflet-draw-actions { display: none !important; }
+
+.leaflet-popup-tip {
+  background: rgba(15, 23, 42, 0.88) !important;
+  border: var(--border-glass-emerald) !important;
+}
+
+.leaflet-popup-content {
+  margin: 10px 14px !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+}
+
+.leaflet-draw-toolbar, .leaflet-draw-actions {
+  display: none !important;
+}
+
+/* ─── Custom Animated Map Selection Pin ─── */
+.custom-pin-marker-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.pin-pulse-ring {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.3);
+  border: 2px solid #10b981;
+  animation: pinPulseRing 2s infinite ease-out;
+  pointer-events: none;
+}
+
+.pin-icon-body {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.6), 0 0 12px rgba(16, 185, 129, 0.8);
+  border: 2px solid #ffffff;
+  animation: pinDrop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+.pin-icon-body i {
+  transform: rotate(45deg);
+  color: #ffffff;
+  font-size: 16px;
+}
+
+/* Region Preset Pins */
+.region-pin-marker-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.region-pin-body {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: var(--glass-blur-sm);
+  -webkit-backdrop-filter: var(--glass-blur-sm);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  color: #34d399;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 0 10px rgba(16, 185, 129, 0.2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.region-pin-body:hover {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: #34d399;
+  transform: translateY(-2px) scale(1.05);
+  color: #ffffff;
+}
 
 /* ─── Animations ─── */
+@keyframes pinPulseRing {
+  0% { transform: scale(0.4); opacity: 1; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes pinDrop {
+  0% { transform: translateY(-30px) rotate(-45deg) scale(0.3); opacity: 0; }
+  100% { transform: translateY(0) rotate(-45deg) scale(1); opacity: 1; }
+}
+
 @keyframes pulse {
-  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.4); }
-  50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(22, 163, 74, 0); }
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }
 }
+
 @keyframes spin { to { transform: rotate(360deg); } }
-@keyframes countPulse {
-  0% { transform: scale(0.85); opacity: 0.5; }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); opacity: 1; }
-}
+
 @keyframes analyzeGlow {
-  0%, 100% { box-shadow: 0 2px 12px rgba(2, 132, 199, 0.2); }
-  50% { box-shadow: 0 4px 24px rgba(2, 132, 199, 0.4); }
+  0%, 100% { box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3), 0 0 15px rgba(6, 182, 212, 0.2); }
+  50% { box-shadow: 0 8px 32px rgba(16, 185, 129, 0.6), 0 0 25px rgba(6, 182, 212, 0.5); }
 }
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
