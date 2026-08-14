@@ -11,4 +11,5 @@ uvicorn>=0.22.0
 torch
 pillow
 numpy
+python-multipart>=0.0.6
 
