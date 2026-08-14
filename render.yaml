@@ -36,6 +36,6 @@ services:
   #     - key: VITE_API_BASE_URL
   #       fromService:
   #         type: web
-  #         name: geotree-platform
+  #         name: geotree
   #         property: host
 
