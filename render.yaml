@@ -10,6 +10,8 @@ services:
     env: docker
     plan: free
     region: singapore
+    domains:
+      - geotree.onrender.com
     dockerfilePath: ./Dockerfile
     dockerContext: .
     healthCheckPath: /api/regions
@@ -23,6 +25,10 @@ services:
         value: "/app"
       - key: ENVIRONMENT
         value: "production"
+      - key: APP_URL
+        value: "https://geotree.onrender.com"
+      - key: RENDER_EXTERNAL_URL
+        value: "https://geotree.onrender.com"
 
   # Optional Decoupled Static Site (if hosting React frontend standalone on Render)
   # - type: web
